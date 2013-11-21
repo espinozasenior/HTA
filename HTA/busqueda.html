@@ -8,7 +8,12 @@
          <!-- styles needed by jScrollPane - include in your own sites -->
     <link type="text/css" href="css/jquery.jscrollpane.css" rel="stylesheet" media="all" />
 		<link rel="stylesheet" href="css/jquery.mobile-1.3.1.css" />
-		<link rel="stylesheet" href="css/style.css"/>	
+		<link rel="stylesheet" href="css/style.css"/>
+        <script src="js/buscador.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
 		<script src="js/jquery.js"></script>
         <script src="js/highcharts.js"></script>
 		<script src="js/jquery.mobile-1.3.1.js"></script>
@@ -701,7 +706,7 @@
 					<div class="contenido_recuadro">
 						<section class="scroll-pane">
                             <article class="result">
-                                <header><label class="titulo">No se encontró ningún resultado.</label><div onclick="window.location.replace(localStorage.getItem('atras'))" class="btn-ir" data-id=""><span>Atrás</span></div></header></footer>
+                                <header><label class="titulo">No se encontró ningún resultado.</label><div onclick="window.location.replace(localStorage.getItem('atras'))" class="btn-ir" data-id=""><span>Atrás</span></div></header>
                             </article>                            
                         </section>
                         <div id="busqueda-temporal" style="display:none;"></div>
