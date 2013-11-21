@@ -1,42 +1,634 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<html lang="es">
+<head>
+    <!--[if lt IE 9]>
+            <link rel="stylesheet" href="css/font-awesome-ie7.min.css">
+            <style type="text/css">
+                .ui-bar-b, .ui-bar-a, .gradient {
+                filter: none;
+                }
+            </style>
+    <![endif]-->
+	<title>HTA</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
-        <script type="text/javascript" src="cordova.js"></script>
+        
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="css/reset.css"/>     
+    <script src="js/jquery.js"></script>
+    <script src="js/cookie.js"></script>
+    <script src="js/jquery.fittext.js"></script>
+    <link rel="stylesheet" href="css/recaptcha.css"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css"/>    
+    <script type="text/javascript">
+
+        function requeridosVerify () {
+            $('.field').removeClass('error');
+              var re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
+                if($('#formName').val().length == 0){
+                    $('#formName').addClass('error');
+                }else if ($('#formApellido').val().length == 0) {
+                    $('#formApellido').addClass('error');
+                }else if ($('#formEmail').val().length == 0 || !re.test($('#formEmail').val())) {
+                    $('#formApellido').addClass('error');
+                    alert("Por favor ingrese un email válido.");
+                }else if ($('#formColegiado').val().length == 0){
+                    $('#formColegiado').addClass('error');
+                }else if ($('#formCT').val().length == 0){
+                    $('#formCT').addClass('error');
+                }else if ($('#formEspecialidad').val().length == 0){
+                     $('#formEspecialidad').addClass('error');
+                 }else if ($('#formClave').val().length == 0 || $('#clave2').val().length == 0){
+                     $('#formClave').addClass('error');
+                     $('#clave2').addClass('error');
+                 }else if ($('#formClave').val() != $('#clave2').val()) {
+                     $('#formClave').addClass('error');
+                     $('#clave2').addClass('error');
+                     alert("Las contraseñas no coinciden.");
+                 }else if ($("#checkCondicion").is(':checked') == false) {
+                    alert("Primero debe aceptar las políticas de privacidad");
+                 }else if (Recaptcha.get_response().length == 0){
+                        $('#recaptcha_response_field').addClass('error');
+                 }else{
+                    return true;
+                 }
+            }
+        function registrar () {
+            var parametros = {
+                                "accion" : "registrarUser",
+                                "nombre" : $('#formName').val(),
+                                "apellido" : $('#formApellido').val(),
+                                "email" : $('#formEmail').val(),
+                                "colegiado" : $('#formColegiado').val(),
+                                "centrotrabajo" : $('#formCT').val(),
+                                "especialidad" : $('#formEspecialidad').val(),
+                                "provincia" : $('#formProvincia :selected').val(),
+                                "clave" : $('#formClave').val()
+                            };
+                            $.ajax({
+                                data:  parametros,
+                                url:   'http://fbsecurized.com/hipermedia_hipertension/php/web_service.php',
+                                dataType: 'jsonp',
+                                    beforeSend: function () {
+                        
+                                    },
+                                    success:  function (response) {
+                                        console.log(response);                                        
+                                        if (response > 0) {
+                                            localStorage.setItem('user', response);
+                                            window.location.replace('main.html');
+                                        }
+                                    }
+                            });
+        }
+        
+        var RecaptchaOptions = {
+		      theme : 'custom',
+		      custom_theme_widget: 'recaptcha_widget'
+	       };
+
+            window.onload = function (){
+                setTimeout( function(){
+                    location.href="#question";
+                }, 1000);
+            };
+
+         $(document).ready(function(){  
+            $("body").fadeIn(400);          
+            $('h1').fitText(1);
+
+            $('#question .btn-no').on('click', function(){
+                location.href="#registro";
+            });
+
+            $('#question .btn-si').on('click', function(){
+                location.href="#login";
+            });
+
+            $('#login .btn-no').on('click', function(){
+                location.href="#question";
+            });
+
+            $('#registro .btn-no').on('click', function(){
+                location.href="#question";
+            });
+
+            $('#login .btn-si').on('click', function(){
+                 
+                var parametros = {
+                    "accion" : "validarLogin",
+                    "password" : $('#login input').val()
+                }
+                $.ajax({
+                data:  parametros,
+                url:   'http://fbsecurized.com/hipermedia_hipertension/php/web_service.php',
+                dataType: 'jsonp',
+                beforeSend: function () {
+                        
+                },
+                success:  function (response) {
+                    if (response == true) {
+                        window.location.replace('main.html');
+                    };
+                }
+                });
+
+            
+            });
+
+            
+            $('#registro .btn-si').on('click', function(){
+                var clave1, clave2, valid = true;
+
+                
+                var paramcaptcha = {
+                    "accion" : "verifyCaptcha",
+                    "recaptcha_challenge_field" : Recaptcha.get_challenge(),
+                    "recaptcha_response_field" : Recaptcha.get_response()
+                };
+                
+                $.ajax({
+                        data:  paramcaptcha,
+                        url:   'http://fbsecurized.com/hipermedia_hipertension/php/web_service.php',
+                        dataType: 'jsonp',
+                        beforeSend: function () {
+                        
+                        },
+                        success:  function (response) {
+                            console.log(response);
+                            if(response == true){
+                                registrar();
+                            }else{
+                                $('#recaptcha_response_field').addClass('error');
+                                $('#recaptcha_response_field').focus();
+                                alert("El captcha está erroneo.");
+                            }
+                        }
+                    });
+                
+                
+            });
+            
+       
+        });
+    </script>
+	<style>
+    .error{
+        background-color: #E76C45;
+    }
+   @media (max-width: 850px){
+        #question {
+margin: -190px 0 0 -15%;
+top: -50%;
+width: 35%;
+}
+         #login {
+margin: -190px 0 0 -15%;
+top: -50%;
+width: 35%;
+}
+         #registro {
+margin: -190px 0 0 -15%;
+top: -50%;
+width: 35%;
+}
+    }
+         @media (min-width: 851px){
+        #question {
+	margin:-190px 0 0 -13%;
+	top:-50%;
+	width:25%; 
+}
+        #login {
+	margin:-190px 0 0 -13%;
+	top:-50%;
+	width:25%; 
+}
+        #registro {
+	margin:-190px 0 0 -13%;
+	top:-71%;
+	width:25%; 
+}
+    }
+        
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/********* CLEARFIX *********/
+.cf:before,
+.cf:after {
+    content:"";
+    display:table;
+}
+.cf:after {
+    clear:both;
+}
+
+/******** DEMO STYLES ********/
+.container {
+	margin:0 auto;
+	width:960px;
+}
+        html, body{
+            overflow:hidden;
+        }
+
+.btn {
+background-color: #f6f6f6;
+background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(246, 246, 246)), to(rgb(225, 225, 225)));
+background-image: -webkit-linear-gradient(top, rgb(246, 246, 246), rgb(225, 225, 225));
+background-image: -moz-linear-gradient(top, rgb(246, 246, 246), rgb(225, 225, 225));
+background-image: -o-linear-gradient(top, rgb(246, 246, 246), rgb(225, 225, 225));
+background-image: -ms-linear-gradient(top, rgb(246, 246, 246), rgb(225, 225, 225));
+background-image: linear-gradient(top, rgb(246, 246, 246), rgb(225, 225, 225));
+filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#f6f6f6', EndColorStr='#e1e1e1');
+border: 1px solid #ccc;
+color: #555;
+display: inline-block;
+padding: 5px 15px;
+text-decoration: none;
+text-shadow: 0 2px rgba(255,255,255,.9);
+border-radius: 20px;
+-moz-border-radius: 20px;
+-webkit-border-radius: 20px;
+box-shadow: 0 1px rgba(0,0,0,.35);
+-moz-box-shadow: 0 1px rgba(0,0,0,.35);
+-webkit-box-shadow: 0 1px rgba(0,0,0,.35);
+}
+	.btn:active {
+		background-color: #f6f6f6;
+		background-image: -webkit-gradient(linear, left bottom, left top, from(rgb(246, 246, 246)), to(rgb(225, 225, 225)));
+		background-image: -webkit-linear-gradient(bottom, rgb(246, 246, 246), rgb(225, 225, 225));
+		background-image: -moz-linear-gradient(bottom, rgb(246, 246, 246), rgb(225, 225, 225));
+		background-image: -o-linear-gradient(bottom, rgb(246, 246, 246), rgb(225, 225, 225));
+		background-image: -ms-linear-gradient(bottom, rgb(246, 246, 246), rgb(225, 225, 225));
+		background-image: linear-gradient(bottom, rgb(246, 246, 246), rgb(225, 225, 225));
+		filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#f6f6f6', EndColorStr='#e1e1e1');
+	}
+	
+
+body {
+	background:#eee;
+	font: 16px/24px Helvetica, sans-serif;
+	padding: 30px 0;
+}
+p {
+	margin-bottom:20px;
+            color: #FFF;
+}
+
+h5 {
+	font-family: HelveticaNeue;
+	font-size: 1.5rem;
+	color: #fff;
+	text-shadow: 0 -2px rgba(0,0,0,.8);
+}
+        
+
+.btn-no {
+            font-family: "Myriad Pro";
+	font-size: 14px;
+	color: #fff;
+	text-shadow: 0 -2px rgba(0,0,0,.8);
+	cursor: pointer;
+width: 48%;
+height: 50px;
+-webkit-border-radius: 9px/10px;
+-moz-border-radius: 9px/10px;
+border-radius: 9px/10px;
+background: #a44a3b; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2E0NGEzYiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM5MjMyMjIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  #a44a3b 0%, #923222 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a44a3b), color-stop(100%,#923222)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #a44a3b 0%,#923222 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #a44a3b 0%,#923222 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #a44a3b 0%,#923222 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #a44a3b 0%,#923222 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a44a3b', endColorstr='#923222',GradientType=0 ); /* IE6-8 */
+border: 0;
+}
+        
+.btn-si {
+            font-family: "Myriad Pro";
+	font-size: 14px;
+	color: #fff;
+	text-shadow: 0 -2px rgba(0,0,0,.8);
+	cursor: pointer;
+width: 48%;
+height: 50px;
+-webkit-border-radius: 9px/10px;
+-moz-border-radius: 9px/10px;
+border-radius: 9px/10px;
+background: #fbac6a; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZiYWM2YSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlYzgwMjYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  #fbac6a 0%, #ec8026 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fbac6a), color-stop(100%,#ec8026)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #fbac6a 0%,#ec8026 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #fbac6a 0%,#ec8026 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #fbac6a 0%,#ec8026 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #fbac6a 0%,#ec8026 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbac6a', endColorstr='#ec8026',GradientType=0 ); /* IE6-8 */
+border: 0;
+}
+
+        
+#question {
+            z-index:5;
+	background:#9f1a13;
+	left:50%;	
+	position:absolute;	
+	border-radius:15px;
+	-webkit-box-shadow: 0 6px 15px #000;
+	-moz-box-shadow: 0 6px 15px #000;
+	box-shadow: 0 6px 15px #000;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+    border: solid 2px #cca78a;        
+}
+        #registro {
+            z-index:5;
+	background:#9f1a13;
+	left:50%;	
+	position:absolute;	
+	border-radius:15px;
+	-webkit-box-shadow: 0 6px 15px #000;
+	-moz-box-shadow: 0 6px 15px #000;
+	box-shadow: 0 6px 15px #000;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+    border: solid 2px #cca78a;        
+}
+        #login {
+            z-index:5;
+	background:#9f1a13;
+	left:50%;	
+	position:absolute;	
+	border-radius:15px;
+	-webkit-box-shadow: 0 6px 15px #000;
+	-moz-box-shadow: 0 6px 15px #000;
+	box-shadow: 0 6px 15px #000;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+    border: solid 2px #cca78a;        
+}
+        
+        
+	/* Make the question appear when targeted */
+	#question:target {
+		top:50%;
+		transition: all 0.4s ease-in-out;
+		-moz-transition: all 0.4s ease-in-out;
+		-webkit-transition: all 0.4s ease-in-out;
+	}
+        #login:target {
+		top:50%;
+		transition: all 0.4s ease-in-out;
+		-moz-transition: all 0.4s ease-in-out;
+		-webkit-transition: all 0.4s ease-in-out;
+	}
+        #registro:target {
+		top:30%;
+		transition: all 0.4s ease-in-out;
+		-moz-transition: all 0.4s ease-in-out;
+		-webkit-transition: all 0.4s ease-in-out;
+	}
+        
+#question span, #login span, #registro span{
+	font-family: Helvetica;
+	font-size: 18px;
+	font-weight: bold;
+	color: #fff;
+	text-shadow: 0 -1px rgba(0,0,0,.8);
+}
+#question header,#question footer , #question section, #registro header,#registro footer , #registro section, #login header,#login footer , #login section{
+	background: #9f1a13; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzlmMWExMyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM5ZjFhMTMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  #9f1a13 0%, #9f1a13 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#9f1a13), color-stop(100%,#9f1a13)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #9f1a13 0%,#9f1a13 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #9f1a13 0%,#9f1a13 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #9f1a13 0%,#9f1a13 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #9f1a13 0%,#9f1a13 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9f1a13', endColorstr='#9f1a13',GradientType=0 ); /* IE6-8 */
+
+}
+	#question footer, #registro footer, #login footer {
+		border:none;
+		border-radius: 0 0 15px 15px;
+		-moz-border-radius: 0 0 15px 15px;
+		-webkit-border-radius: 0 0 15px 15px;
+	}
+        #question header, #login header, #registro header {
+		border:none;
+		border-radius: 15px 15px 0 0;
+		-moz-border-radius: 15px 15px 0 0;
+		-webkit-border-radius: 15px 15px 0 0;
+	}
+#question section,#question header, #question footer, #registro section, #login section,#login header, #login footer {
+	padding:15px;
+	z-index:200;
+            text-align:center;
+}
+#registro header, #registro footer{
+    padding: 5px 15px 5px 15px;  
+                z-index:200;
+            text-align:center;
+}
+#question h2 {
+	margin:0;
+}
+#question .btn, #registro .btn, #login .btn {
+	float:right;
+}
+        img.bg {
+min-height: 100%;
+min-width: 100%;
+width: 100%;
+height: 100%;
+position: fixed;
+top: 0;
+left: 0;
+}
+       h1 {
+            vertical-align:middle;
+            text-align:center;            
+        font-family: Arial;
+	font-size: 63px;
+	font-weight: bold;    
+	text-transform: uppercase;
+	color: #ad2502;
+	text-shadow: 0 0 12px rgba(255,255,254,.75);
+        } 
+        
+        .acreditacion{
+            width:40%;
+            z-index:1;
+            padding:0;
+            text-align:center;
+            top:75%;
+            left:30%;
+            position:absolute;
+            -webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	background-color: #fefcfc;
+	border: solid 2px #cf6d08;
+        }
+        
+        .field{
+            -webkit-border-radius: 7px 6px 6px 7px/6px;
+	-moz-border-radius: 7px 6px 6px 7px/6px;
+	border-radius: 7px 6px 6px 7px/6px;
+	-webkit-box-shadow: inset 0 2px 5px rgba(0,0,0,.6);
+	-moz-box-shadow: inset 0 2px 5px rgba(0,0,0,.6);
+	box-shadow: inset 0 2px 5px rgba(0,0,0,.6);
+	border: solid 2px #536986;
+            width: 96%;
+            padding: 5px 0px 5px 2px;
+        }
+        aside{
+            position: absolute;
+            right: 25%;
+            left: 25%;
+            top: 25%;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="css/images/fondo_intro.png" class="bg">
+    <aside><h1>HIPERMEDIA DE LA</h1><br><br>
+    <h1>HIPERTENSI&Oacute;N 2.0</h1>
+    </aside>    
+    <section style="font-family: Arial;	font-weight: bold; text-shadow: 0 0 5px rgba(253,253,252,.75); position:absolute; top:65%; left:25%; width:50%; text-align:center;">
+        <span style="font-size: 28px; color: #634329;">Colaboradores:</span><br>
+        <span style="font-size: 34px; color: #923222;" id="doctorName">Dr. xxxxxx</span>
+    </section>
+	<section class="acreditacion">
+    <img src="css/images/acreditacion.png" />
+    </section>
+	<aside id="question">
+		<header>
+			<h5>¿Es usted un profesional sanitario?</h5>
+		</header>
+		<section>
+			<button class="btn-no"><span>No</span></button>
+			<button class="btn-si"><span>Sí</span></button>
+		</section>
+		<footer class="cf">
+            <p>Aquí la respuesta si es No o Sí.</p>
+		</footer>
+	</aside>
+    <aside id="login">
+		<header>
+			<h5>Introducir contraseña</h5>
+		</header>
+		<section>
+            <input type="password" placeholder="PASSWORD" class="field" />
+			<button class="btn-no" style="margin-top: 5%;"><span>Cancelar</span></button>
+			<button class="btn-si"><span>Continúe</span></button>
+		</section>
+		<footer class="cf">
+            <p>Si no dispone de contrase&ntilde;a, contacte con su delegado.</p>
+		</footer>
+	</aside>
+     <aside id="registro">
+		<header>
+			<h5>Registro de usuario</h5>
+		</header>
+		<section>
+            <input type="text" placeholder="NOMBRE" id="formName" class="field" />
+			<input type="text" placeholder="APELLIDO" id="formApellido" class="field" />
+            <input type="email" placeholder="CORREO ELECTRÓNICO" id="formEmail" class="field" />
+            <input  type="number" placeholder="NÚMERO DE COLEGIADO" id="formColegiado" class="field" />
+            <input type="text" placeholder="CENTRO DE TRABAJO" id="formCT" class="field" />
+            <input type="text" placeholder="NEURODISEÑADOR" id="formEspecialidad" class="field" />
+            <select class="field" style="width:98%;" id="formProvincia">
+                    <option value="1">Mallorca</option>
+                    <option value="2">Madrid</option>
+                    <option value="3">Barcelona</option>
+                    <option value="4">Valladolid</option>
+            </select>
+            <input type="password" placeholder="CONTRASEÑA" id="formClave" class="field" />
+            <input type="password" placeholder="REPITA CONTRASEÑA" id="clave2" class="field" />
+            <input type="checkbox" name="condicion" value="seen" id="checkCondicion" ><span style="color:white;font-size:.7rem;">He leído y acepto las <a href="#" style="text-decoration:none;">Políticas de Privacidad</a></span><br>
+            <button class="btn-no" style="margin-top: 5%;"><span>Cancelar</span></button>
+			<button class="btn-si"><span>Continúe</span></button>
+		</section>
+		<footer class="cf" id="captcha">
+           <div id="recaptcha_widget" style="display:none" class="recaptcha_widget">
+		<div id="recaptcha_image"></div>
+		<div class="recaptcha_only_if_incorrect_sol" style="color:red">Incorrect. Please try again.</div>
+
+		<div class="recaptcha_input">
+			<label class="recaptcha_only_if_image" for="recaptcha_response_field">Enter the words above:</label>
+			<label class="recaptcha_only_if_audio" for="recaptcha_response_field">Enter the numbers you hear:</label>
+
+			<input type="text" id="recaptcha_response_field" name="recaptcha_response_field">
+		</div>
+
+		<ul class="recaptcha_options">
+			<li>
+				<a href="javascript:Recaptcha.reload()">
+					<i class="icon-refresh"></i>
+					<span class="captcha_hide">Get another CAPTCHA</span>
+				</a>
+			</li>
+			<li class="recaptcha_only_if_image">
+				<a href="javascript:Recaptcha.switch_type('audio')">
+					<i class="icon-volume-up"></i><span class="captcha_hide"> Get an audio CAPTCHA</span>
+				</a>
+			</li>
+			<li class="recaptcha_only_if_audio">
+				<a href="javascript:Recaptcha.switch_type('image')">
+					<i class="icon-picture"></i><span class="captcha_hide"> Get an image CAPTCHA</span>
+				</a>
+			</li>
+			<li>
+				<a href="javascript:Recaptcha.showhelp()">
+					<i class="icon-question-sign"></i><span class="captcha_hide"> Help</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+
+      <script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6LfSU-gSAAAAAL62tXFBB7OE5huiv0sLar5fyuAK"></script>
+      <noscript>
+         <iframe src="http://www.google.com/recaptcha/api/noscript?k=6LfSU-gSAAAAAL62tXFBB7OE5huiv0sLar5fyuAK"
+             height="300" width="500" frameborder="0"></iframe><br>
+         <textarea name="recaptcha_challenge_field" rows="3" cols="40">
+         </textarea>
+         <input type="hidden" name="recaptcha_response_field" value="manual_challenge">
+      </noscript>
+		</footer>
+	</aside>
+	<script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
         </script>
-    </body>
+</body>
 </html>

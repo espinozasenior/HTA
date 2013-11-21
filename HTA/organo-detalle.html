@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>&Oacute;RGANOS DIANA</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="css/jquery.mobile-1.3.1.css" />
+    <!-- styles needed by jScrollPane - include in your own sites -->
+    <link type="text/css" href="css/jquery.jscrollpane.css" rel="stylesheet" media="all" />
+    <link type="text/css" href="css/flexslider.css" rel="stylesheet" media="all" />
+    <link rel="stylesheet" href="css/style.css"/>
+    <style type="text/css" id="page-css">
+        /* Styles specific to this particular page */
+        .scroll-pane
+        {
+            height: 390px;
+            overflow: visible;
+			font-size:16px;
+			margin-top:5px;
+        }
+        .horizontal-only
+        {
+            height: auto;
+            max-height: 200px;
+        }
+        
+        #titulo{
+            text-transform: uppercase;
+        }
+
+        .flexslider{
+          cursor: pointer;
+        }
+      
+		
+		.ui-btn-hover-c{
+			background: #d24c16;
+			background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIxJSIgc3RvcC1jb2xvcj0iI2QyNGMxNiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUzJSIgc3RvcC1jb2xvcj0iI2U4NjcxZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlNzdjMjQiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+			background: -moz-linear-gradient(top, #d24c16 1%, #e8671e 53%, #e77c24 100%); 
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#d24c16), color-stop(53%,#e8671e), color-stop(100%,#e77c24)); 
+			background: -webkit-linear-gradient(top, #d24c16 1%,#e8671e 53%,#e77c24 100%); 
+			background: -o-linear-gradient(top, #d24c16 1%,#e8671e 53%,#e77c24 100%); 
+			background: -ms-linear-gradient(top, #d24c16 1%,#e8671e 53%,#e77c24 100%);
+			background: linear-gradient(to bottom, #d24c16 1%,#e8671e 53%,#e77c24 100%);
+		}
+    </style>
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.mobile-1.3.1.js"></script>
+    <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+	<script type="text/javascript" src="js/jquery.jscrollpane.js"></script>
+    <script type="text/javascript" src="js/jquery.flexslider.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    var gallery;
+    $( document ).on( "pageshow", function(){
+
+	   getOrgano(); 	   
+	  
+	     
+	   calcular();
+
+     $('.flexslider').on('click', function(){
+        window.location.replace('organo-imagen-detalle.html?id='+gallery+'&organo='+getUrlVars('organo'));
+     });
+        
+	   window.addEventListener("resize", function(){
+                            location.reload();
+						}, true);
+	  
+    });
+        
+        function getWindowHeight() {
+				var windowHeight = 0;
+				if (typeof(window.innerHeight) == 'number') {
+					windowHeight = window.innerHeight;
+				}
+				else {
+					if (document.documentElement && document.documentElement.clientHeight) {
+						windowHeight = document.documentElement.clientHeight;
+					}
+					else {
+						if (document.body && document.body.clientHeight) {
+							windowHeight = document.body.clientHeight;
+						}
+					}
+				}
+				return windowHeight;
+			}
+        
+    function calcular(){
+        //barra superior		
+	   var hencab_1= $('#encabezado').css('height');
+	   var pencab= $('#encabezado').css('padding-top');
+	   var valor_enca1 = hencab_1.substr(0, (hencab_1.length - 2));
+	   var valorp = 2 * (pencab.substr(0, (pencab.length - 2)));
+	   var total_1 = parseFloat(valor_enca1) + parseFloat(valorp);
+	   //barra del footer
+	   var footer= $('#footer').css('height');
+	   var valor_footer = footer.substr(0, (footer.length - 2));
+	   var topfooter= $('#footer').css('padding-top');
+	   var valor_topfooter = topfooter.substr(0, (topfooter.length - 2));
+	   var bottomfooter= $('#footer').css('padding-bottom');
+	   var valor_bottomfooter = bottomfooter.substr(0, (bottomfooter.length - 2));
+	   var total_2 = parseFloat(valor_footer) + parseFloat(valor_topfooter) + parseFloat(valor_bottomfooter) ;
+	   //contenido
+	   var topcontenido= $('#contenido').css('padding-top');
+	   var bottomcontenido= $('#contenido').css('padding-bottom');
+	   var valor_top = topcontenido.substr(0, (topcontenido.length - 2));
+	   var valor_bottom = bottomcontenido.substr(0, (bottomcontenido.length - 2));
+	   var total_3= parseFloat(valor_top) + parseFloat(valor_bottom) ;
+
+	   var hcontenido = getWindowHeight() - total_1 - total_2- total_3;
+       $('.fondo_contenido').css('height', hcontenido);
+	   
+	   var wcontenido= $('#contenido').css('width');
+	   var valor3= wcontenido.substr(0, (wcontenido.length - 2));
+	   var himagen = hcontenido - 10;
+	   var wimagen = valor3 - 2;
+	   document.getElementById('imagen_fondo').height=himagen;
+	   document.getElementById('imagen_fondo').width=valor3;
+	   
+	   //menu inferior
+	   var afooter = $('#footer').css('width');
+	   var valor_footer = afooter.substr(0, (afooter.length - 2));
+	   
+	   var wbotonmenu = $('.boton_menu').css('width');
+	   var valor_menu = wbotonmenu.substr(0, (wbotonmenu.length - 2));
+	   var pbotonmenu = $('.boton_menu').css('margin-left');
+	   var valor_pmenu = pbotonmenu.substr(0, (pbotonmenu.length - 2));
+	   var total_menu = parseFloat(valor_menu) + parseFloat(valor_pmenu);
+	   
+	   var wbotonperfil = $('.boton_perfil').css('width');
+	   var valor_perfil = wbotonperfil.substr(0, (wbotonperfil.length - 2));
+	   var pbotonperfil = $('.boton_perfil').css('margin-right');
+	   var valor_pperfil = pbotonperfil.substr(0, (pbotonperfil.length - 2));
+	   var total_perfil = parseFloat(valor_perfil) + parseFloat(valor_pperfil);
+	   
+	   var wmenu = $('.div_menu_footer').css('width');
+	   var valor_wmenu = wmenu.substr(0, (wmenu.length - 2));
+
+	   var total_margin_menu = (parseFloat(valor_footer) - parseFloat(total_menu) - parseFloat(total_perfil) - parseFloat(valor_wmenu))/2;
+	   $('.div_menu_footer').css('margin-left', total_margin_menu);
+	  
+	   //DIV IMAGEN Y CONTENIDO
+	   var wdiv_cont= $('#div_cont').css('width');
+	   var valor_div_cont = wdiv_cont.substr(0, (wdiv_cont.length - 2));
+	  /* var pl_cont= $('#div_cont').css('margin-left');
+	   var valor_pl_contt = pl_cont.substr(0, (pl_cont.length - 2));
+	   var pr_cont= $('#div_cont').css('margin-right');
+	   var valor_pr_cont = pr_cont.substr(0, (pr_cont.length - 2));
+	   
+	   var total_divcont = valor_div_cont-valor_pl_contt-valor_pr_cont;*/
+	   var div_text = valor_div_cont * 0.68;
+	   var div_scroll  =  div_text * 0.95;
+	   var div_img = valor_div_cont * 0.30;
+	   $('.div-img').css('width', div_img);
+        if(window.innerHeight > window.innerWidth){
+                                $('.div-text').css('width', '22%');
+                                $('.jspPane').css('width', '96%');
+                            }else{
+                                $('.div-text').css('width', '40%');
+                                $('.jspPane').css('width', '98%');
+                            }	   
+	   $('.scroll-pane').css('width', '100%');
+	   $('.jspContainer').css('width', '100%');	   
+        
+    }
+        
+        function getUrlVars(VarSearch){
+	   var SearchString = window.location.search.substring(1);
+	   var VariableArray = SearchString.split('&');
+	       for(var i = 0; i < VariableArray.length; i++){
+		      var KeyValuePair = VariableArray[i].split('=');
+		          if(KeyValuePair[0] == VarSearch){
+			         return KeyValuePair[1];
+		          }
+	       }
+    }
+        
+    function getOrgano(){
+        var organo = getUrlVars('organo');
+        var parametros = {
+			   "accion" : "obtenerOrgano",
+			   "id" : organo
+        };
+		
+		$.ajax({
+                data:  parametros,
+                url:   'http://fbsecurized.com/hipermedia_hipertension/php/web_service.php',
+                dataType: 'jsonp',
+                beforeSend: function () {
+                        
+                },
+                success:  function (response) {
+                      gallery = response[0].IMAGEN_ORGANO;
+                      $('#titulo h5').text(response[0].NOMBRE_ORGANO);
+                       $('#organo_content').html(response[0].CONTENIDO_ORGANO);
+                        $('.scroll-pane').jScrollPane({showArrows: true});
+                        loadImages(response[0].IMAGEN_ORGANO);
+                }
+        });
+    }
+        
+    function loadImages(idGallery){
+        var parametros = {
+			"accion" : "obtenerGallery",
+			"id" : idGallery
+        };
+        
+        $.ajax({
+                data:  parametros,
+                url:   'http://fbsecurized.com/hipermedia_hipertension/php/web_service.php',
+                dataType: 'jsonp',
+                beforeSend: function () {
+                        
+                },
+                success:  function (response) {
+                       $(response).each(function (){
+                           $('.slides').append('<li><img src="'+this.URL_THUMB+'" width="100" height="200" /></li>');
+                       });
+                        $('.flexslider').flexslider({animation: "slide", slideshow:false});
+                }
+        });
+    }
+	
+</script>
+</head>
+<body>
+<div data-role="page" class="jqm-demos">
+    <div id="encabezado" class="ui-bar ui-bar-b">
+        <div style="float: left; margin-top: 0.3em;">
+            <h1>&Oacute;RGANOS DIANA</h1>
+        </div>
+        <div style="float: right;  margin-top: 0.2em;">
+            <div data-role="fieldcontain" class="ui-hide-label" style="float: left;">
+                <input type="search" name="search-110" id="search-10" value="">
+            </div>
+            <div style="float: right;">
+                <a href="#" data-role="button" data-inline="true" data-mini="true" class="boton_buscar">BUSCAR</a>
+                <a href="#" data-inline="true" data-mini="true" class="boton_fav">
+                    <img src="css/images/fav-icon.png" width="24" height="33">
+                </a>
+                <a href="#" data-inline="true" data-mini="true" class="boton_info">
+                    <img src="css/images/info-icon.png" width="33" height="33">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="contenido" data-role="content" class="jqm-content fondo_contenido" style="padding:0px !important;">
+         <div id="div_cont" style="position:absolute; margin: 2em; width:1291px">
+            <div id="titulo" style="display:block; "> <h5></h5></div>
+            <div class="div-img">
+               <h6>Imagen Patol&oacute;gica</h6>
+               <div class="flexslider">
+                  <ul class="slides">
+                    
+                  </ul>
+                </div>
+               <div id="lista-casos">
+                 <h6>Acceso directo a casos <br> cl&iacute;nicos relacionados</h6>
+                 <div data-role="controlgroup" style="border-radius: 0px;">
+                    <a href="#" data-role="button" style="border-left: 0px; border-right: 0px;">SOSPECHA DE CRISIS HIPERTENSIVA</a>
+                    <a href="#" data-role="button" style="border-left: 0px; border-right: 0px;">HIPERTENSION ARTERIAL ESENCIAL MALIGNA</a>
+                    <a href="#" data-role="button" style="border-left: 0px; border-right: 0px;">OTRO CASO CLINICO</a>
+                </div>
+               </div>
+            </div>
+            <div class="div-text">
+               <h7>Etiopatogenia</h7>
+               <div class="scroll-pane" id="organo_content">
+                    
+               </div>
+            </div>
+         </div>
+         <div class="recuadro-detalle" style="margin-top:5px !important;">
+             <img id="imagen_fondo" src="css/images/previo-1.png" >
+         </div>
+     </div><!-- /content -->
+   <div id="footer" data-role="footer" class="ui-bar">
+        <div class="boton_menu">
+          <span class="span_menu">Men&uacute;</span>
+          <img onclick="window.location.replace('main.html');" src="css/images/menu.png" width="79" height="42"> 
+        </div>
+       <div data-role="navbar" data-grid="l" class="div_menu_footer" style="margin-top:0.2em !important;">
+            <ul style="width:741px; margin-left: auto; margin-right: auto;">
+              <li onclick="window.location.replace('prologos.html');">
+                 <a href="#">
+                  <img src="css/images/prologos-icono.png" width="50" height="44">
+                  <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">PR&Oacute;LOGO</span>               
+                 </a>
+                </li>
+                <div class="separador"></div>
+              <li>
+                     <a href="#" class="ui-btn-active">
+                      <img src="css/images/org-icono.png" width="50" height="44">
+                      <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">&Oacute;RGANOS DIANA</span>
+                     </a>
+                </li>
+                <div class="separador"></div>
+                <li onclick="window.location.replace('casos-clinicos-aviso.html');">
+                     <a href="#">
+                      <img src="css/images/casos-icono.png" width="40" height="44">
+                      <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">CASOS CL&Iacute;NICOS</span>
+                     </a>
+                </li>
+                <div class="separador"></div>
+                <li onclick="window.location.replace('test-previo.html');">
+                     <a href="#">
+                      <img src="css/images/test-icono.png" width="50" height="44">
+                      <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">TEST</span>
+                     </a>
+                </li>
+                <div class="separador"></div>
+                <li onclick="window.location.replace('archivos.html');">
+                     <a href="#">
+                      <img src="css/images/arch-icono.png" width="50" height="44">
+                      <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">ARCHIVOS</span>
+                     </a>
+                </li>
+                <div class="separador"></div>
+                <li onclick="window.location.replace('favoritos.html');">
+                     <a href="#" >
+                      <img src="css/images/fav-icono.png" width="50" height="44">
+                      <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">FAVORITOS</span>
+                     </a>
+                </li>
+            </ul>
+        </div>
+        <div class="boton_perfil">
+          <span class="span_perfil">Mi Perfil</span>
+          <img onclick="window.location.replace('perfil.html');" src="css/images/boton_perfil.png" width="99" height="42"> 
+        </div>
+   </div>
+</div><!-- /page -->
+<script src="js/buscador.js"></script>
+</body>
+</html>

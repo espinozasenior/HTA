@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html style="overflow: hidden;" lang="es">
+	<head>
+		<title>TEST DE HIPERTENSI&Oacute;N DE LA HIPERTENSI&Oacute;N 2.0</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" href="css/jquery.mobile-1.3.1.css" />
+		<link rel="stylesheet" href="css/style.css"/>	
+		<script src="js/jquery.js"></script>
+        <script src="js/highcharts.js"></script>
+		<script src="js/jquery.mobile-1.3.1.js"></script>
+		<script src="js/jquery.ajaxq-0.0.1.js"></script>
+		<script src="js/jquery.fittext.js"></script>
+		<script src="js/fastClick.js"></script>
+		<style>
+		/* Large screens ----------- */ 
+		 @media only screen and (min-width : 870px) {  
+            	
+            	 #encabezado h1{
+                      font-size:1.2rem;
+                    margin-top:1%;
+                }
+                              
+                .div-leyenda {  
+  background-image: url("css/images/forma1.png");  
+  background-repeat: no-repeat;
+  background-size: 28em;
+  margin-left: 3%;
+}
+
+.contenido_recuadro {
+				position: absolute;
+				margin-left: 0;
+				margin-top: 30px;
+				width: 100%;
+			}
+
+.icon-contador{
+	width: 3.3em;
+
+}
+
+.btn-modulo{
+	width: 7.7em;
+	cursor: pointer;
+}
+
+#table-leyenda{
+	width: 24em;
+	margin-left: 1%;
+	font-family: "Bebas Neue";
+
+}
+
+.header-t2{
+	font-family: "Bebas Neue";
+	font-size: 1.4em;
+	float: left;
+	margin-right: 2.3em;
+	margin-left: 2.3em;
+}
+
+#table-control {
+	position: absolute;
+	right: 2em;
+	top: 0em;
+  overflow: hidden;
+  min-width: 230px;
+  max-width: 400px;
+}
+
+ 
+.element {
+  float: left;
+ margin: 0.4em;
+}
+
+.element img{
+	width: 10em;
+}
+
+
+#table-leyenda h4{
+              
+                font-size: 2rem;
+                font-family: "Bebas Neue";
+                color: rgb( 83, 83, 83 );
+                text-align: center;
+                -moz-transform: matrix( 0.80750277847258,0,0,0.81066666666667,0,0);
+                -webkit-transform: matrix( 0.80750277847258,0,0,0.81066666666667,0,0);
+                -ms-transform: matrix( 0.80750277847258,0,0,0.81066666666667,0,0);
+                position: block;
+            }
+
+            .icon-check{
+            	width: 1.9em;
+            }
+            .icon-elipse-verde{
+            	width: 2em;
+            }
+            .icon-elipse-rojo{
+            	width: 2em;
+            }
+            #btn-main{
+            	width: 50%;
+            	cursor: pointer;
+            }
+            #btn-main:active{
+            	margin-top: 2px;
+            }
+            .marcador-cuadro{
+            	background-image: url(css/images/00.png);
+            	background-repeat: no-repeat;
+            	background-position: right;
+            	background-size: 21%;
+            }
+            .marcador{
+            	color: #FFF;
+				position: absolute;
+				margin-top: 0.5%;
+				font-size: 1.5em;
+				padding-left: 0.4em;
+            }
+} 
+            /* iPads (portrait) ----------- */
+           @media only screen and (max-width : 869px) { 
+           		#encabezado h1{
+                      font-size:0.75rem;
+                    margin-top:0.7em;
+                }
+
+
+                              
+                .div-leyenda {  
+  background-image: url("css/images/forma1.png");  
+  background-repeat: no-repeat;
+  background-size: 31em;
+  margin-left: 3%;
+}
+
+.titulo-leyenda{
+	font-size: 0.9em;
+}
+
+.icon-contador{
+	width: 4em;
+
+}
+
+.btn-modulo{
+	width: 7.7em;
+	cursor: pointer;
+}
+
+#table-leyenda{
+	width: 15em;
+	margin-left: 1%;
+	font-family: "Bebas Neue";
+
+}
+
+.header-t2{
+	font-family: "Bebas Neue";
+	font-size: 1.4em;
+	float: left;
+	margin-right: 1.3em;
+	margin-left: 1.3em;
+}
+
+#table-control {
+	position: absolute;
+	right: 15%;
+	left: 15%;
+	top: 25em;
+  overflow: hidden;
+  width: 400px;
+}
+
+.contenido_recuadro {
+				position: absolute;
+				left: 10%;
+				right: 10%;
+				width: 100%;
+			}
+
+ 
+.element {
+  float: left;
+ margin: 0.4em;
+}
+
+.element img{
+	width: 10em;
+}
+
+
+#table-leyenda h4{
+              
+                font-size: 1.5rem;
+                font-family: "Bebas Neue";
+                color: rgb( 83, 83, 83 );
+                text-align: center;
+                -moz-transform: matrix( 0.80750277847258,0,0,0.81066666666667,0,0);
+                -webkit-transform: matrix( 0.80750277847258,0,0,0.81066666666667,0,0);
+                -ms-transform: matrix( 0.80750277847258,0,0,0.81066666666667,0,0);
+                position: block;
+            }
+
+            .icon-check{
+            	width: 1.9em;
+            }
+            .icon-elipse-verde{
+            	width: 2em;
+            }
+            .icon-elipse-rojo{
+            	width: 2em;
+            }
+            #btn-main{
+            	width: 50%;
+            	cursor: pointer;
+            }
+            #btn-main:active{
+            	margin-top: 2px;
+            }
+            .marcador-cuadro{
+            	background-image: url(css/images/00.png);
+            	background-repeat: no-repeat;
+            	background-position: right;
+            	background-size: 21%;
+            }
+            .marcador{
+            	font-family: "Bebas Neue";
+            	color: #FFF;
+				position: absolute;
+				margin-top: 0.3em;
+				font-size: 1.5em;
+				padding-left: 1.3em;
+            }
+                
+            }
+            
+           /* iPads (landscape) ----------- */  
+            @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {  
+               #encabezado h1{
+                      font-size:1.2rem;
+                    margin-top:1%;
+                }
+
+
+                              
+                .div-leyenda {  
+  background-image: url("css/images/forma1.png");  
+  background-repeat: no-repeat;
+  background-size: 31em;
+  margin-left: 3%;
+}
+
+.contenido_recuadro {
+				position: absolute;
+				margin-left: 0;
+				margin-top: 30px;
+				width: 100%;
+			}
+
+.titulo-leyenda{
+	font-size: 0.9em;
+}
+
+.icon-contador{
+	width: 4em;
+
+}
+
+.btn-modulo{
+	width: 7.7em;
+	cursor: pointer;
+}
+
+#table-leyenda{
+	width: 15em;
+	margin-left: 1%;
+	font-family: "Bebas Neue";
+
+}
+
+.header-t2{
+	font-family: "Bebas Neue";
+	font-size: 1.4em;
+	float: left;
+	margin-right: 1.3em;
+	margin-left: 1.3em;
+}
+
+#table-control {
+	position: absolute;
+	right: 2em;
+	top: 1em;
+  overflow: hidden;
+  width: 400px;
+}
+
+ 
+.element {
+  float: left;
+ margin: 0.4em;
+}
+
+.element img{
+	width: 10em;
+}
+
+
+#table-leyenda h4{
+              
+                font-size: 1.5rem;
+                font-family: "Bebas Neue";
+                color: rgb( 83, 83, 83 );
+                text-align: center;
+                -moz-transform: matrix( 0.80750277847258,0,0,0.81066666666667,0,0);
+                -webkit-transform: matrix( 0.80750277847258,0,0,0.81066666666667,0,0);
+                -ms-transform: matrix( 0.80750277847258,0,0,0.81066666666667,0,0);
+                position: block;
+            }
+
+            .icon-check{
+            	width: 1.9em;
+            }
+            .icon-elipse-verde{
+            	width: 2em;
+            }
+            .icon-elipse-rojo{
+            	width: 2em;
+            }
+            #btn-main{
+            	width: 50%;
+            	cursor: pointer;
+            }
+            #btn-main:active{
+            	margin-top: 2px;
+            }
+            .marcador-cuadro{
+            	background-image: url(css/images/00.png);
+            	background-repeat: no-repeat;
+            	background-position: right;
+            	background-size: 21%;
+            }
+            .marcador{
+            	font-family: "Bebas Neue";
+            	color: #FFF;
+				position: absolute;
+				margin-top: 0.3em;
+				font-size: 1.5em;
+				padding-left: 1.3em;
+            }
+            }
+            
+                      
+            
+            html, body{
+				overflow-y: hidden !important;
+			}
+			.jspContainer{
+				width: 100%;
+			}
+			.jspPane{
+				width: 99% !important;
+			}
+            .ui-collapsible-heading > a{
+                background: transparent;
+                border-bottom: solid 1px #e5e4e4;
+            }
+            .ui-collapsible-heading .ui-btn-active{
+                background: transparent;
+                border-bottom: solid 1px #e5e4e4;
+            }
+            
+            .div_recuadro .ui-btn-text {
+                text-transform:uppercase;
+                color:#6ba6bc;
+            }
+            
+			.div_recuadro {
+				margin-left: 0;
+				width: 100%;
+				margin-right: auto;
+				position: relative;
+			}
+			.ui-collapsible-set {
+				margin: .5em 1em;
+			}
+			
+			
+
+            td{
+                text-align:center;
+                width:auto;
+            }
+			
+			.scroll-pane
+			{
+				width: 90% !important;
+				height: auto;
+				overflow: visible !important;
+				font-size: 16px;
+				margin-top: 10px;
+				margin-left: 5%;
+				margin-right: 5%;
+                margin-bottom: 5%;
+			}
+			.horizontal-only
+			{
+				height: auto;
+				max-height: 200px;
+			}
+			
+			.contenido{
+				padding: 0 !important;
+				overflow-y: hidden;
+			}
+			.ui-icon{
+				background-color: transparent;
+			}
+            
+            .panel{
+	
+	position: absolute;
+	margin-left: 102%;
+    z-index:9;
+	-webkit-transition: all .6s ease-in-out;
+	-moz-transition: all .6s ease-in-out;
+	-o-transition: all .6s ease-in-out;
+	-ms-transition: all .6s ease-in-out;
+	transition: all .6s ease-in-out;
+}
+.panel:target{
+	margin-left: 0%;
+    position:relative;
+}
+
+td {  
+  text-align: center;
+}
+
+
+		</style>
+		<script type="text/javascript">
+			var aRespuestasUser = new Array(); 
+			var allMod = new Array(); 
+
+			window.onload = function(){
+				calcularPorcentajesModulos();
+			}
+			
+			$('.scroll-pane').css('overflow', 'visible');
+			$( document ).on( "pageshow", function(){
+					$("body").css("display", "none");
+                    $("body").fadeIn(400);
+
+                    getModulos(); 
+					calculos();
+                   
+					$('#btn-main').on('click', function (){						
+						window.location.replace('test-resumen.html');
+					});
+                                       		
+					window.addEventListener('onload', function() {
+							FastClick.attach(document.body);
+                            
+				    }, false);
+		
+					window.addEventListener("resize", function(){
+							calculos();  
+                        
+						}, true);                
+                
+                    /*Este evento refresca la pagina al cambiar orientación...utilizado para la correcta visualización del scroll de la lista colapsable*/
+                    window.addEventListener("orientationchange", function() {
+							document.location.reload(false);
+						}, false);
+                
+                    		
+					function calculos(){
+                       			
+						//barra superior		
+						var hencab_1= $('#encabezado').css('height');
+						var pencab= $('#encabezado').css('padding-top');
+						var valor_enca1 = hencab_1.substr(0, (hencab_1.length - 2));
+						var valorp = 2 * (pencab.substr(0, (pencab.length - 2)));
+						var total_1 = parseFloat(valor_enca1) + parseFloat(valorp);
+		   
+						//barra del footer
+						var footer= $('#footer').css('height');
+						var valor_footer = footer.substr(0, (footer.length - 2));
+						var topfooter= $('#footer').css('padding-top');
+						var valor_topfooter = topfooter.substr(0, (topfooter.length - 2));
+						var bottomfooter= $('#footer').css('padding-bottom');
+						var valor_bottomfooter = bottomfooter.substr(0, (bottomfooter.length - 2));
+						var total_2 = parseFloat(valor_footer) + parseFloat(valor_topfooter) + parseFloat(valor_bottomfooter) ;
+		   
+						//contenido
+						var topcontenido= $('.contenido').css('padding-top');
+						var bottomcontenido= $('.contenido').css('padding-bottom');
+						var valor_top = topcontenido.substr(0, (topcontenido.length - 2));
+						var valor_bottom = bottomcontenido.substr(0, (bottomcontenido.length - 2));
+						var total_3= parseFloat(valor_top) + parseFloat(valor_bottom) ;	
+						var hcontenido = getWindowHeight() - total_1 - total_3 - total_2;
+						
+						//Tabla
+						$('.fondo_contenido').css('height', hcontenido);
+						$('.hojaBg').css('height', hcontenido);
+						$('.hojaBg').css('width', getWindowWidth());
+                        $('.jspContainer').css('width', '100%');
+						$('.jspPane').css('width','99%');
+                       
+						
+						var h_divrecuadro= $('.div_recuadro').css('height');
+						var valor_divrecuadro= h_divrecuadro.substr(0, (h_divrecuadro.length - 2));
+						var margin_recuadro = (hcontenido-parseFloat(valor_divrecuadro))/2;
+		                $('.scroll-pane').css('height', hcontenido - 100);
+                        
+                        
+						//menu inferior
+						var afooter = $('#footer').css('width');
+						var valor_footer = afooter.substr(0, (afooter.length - 2));
+		   
+						var wbotonmenu = $('.boton_menu').css('width');
+						var valor_menu = wbotonmenu.substr(0, (wbotonmenu.length - 2));
+						var pbotonmenu = $('.boton_menu').css('margin-left');
+						var valor_pmenu = pbotonmenu.substr(0, (pbotonmenu.length - 2));
+						var total_menu = parseFloat(valor_menu) + parseFloat(valor_pmenu);
+		   
+						var wbotonperfil = $('.boton_perfil').css('width');
+						var valor_perfil = wbotonperfil.substr(0, (wbotonperfil.length - 2));
+						var pbotonperfil = $('.boton_perfil').css('margin-right');
+						var valor_pperfil = pbotonperfil.substr(0, (pbotonperfil.length - 2));
+						var total_perfil = parseFloat(valor_perfil) + parseFloat(valor_pperfil);
+		   
+						var wmenu = $('.div_menu_footer').css('width');
+						var valor_wmenu = wmenu.substr(0, (wmenu.length - 2));
+	
+						var total_margin_menu = (parseFloat(valor_footer) - parseFloat(total_menu) - parseFloat(total_perfil) - parseFloat(valor_wmenu))/2;
+						$('.div_menu_footer').css('margin-left', total_margin_menu);
+					}
+
+					//Funcion para obtener el alto de pag
+					function getWindowHeight() {
+						var windowHeight = 0;
+						if (typeof(window.innerHeight) == 'number') {
+							windowHeight = window.innerHeight;
+						}
+						else {
+							if (document.documentElement && document.documentElement.clientHeight) {
+								windowHeight = document.documentElement.clientHeight;
+							}
+							else {
+								if (document.body && document.body.clientHeight) {
+									windowHeight = document.body.clientHeight;
+								}
+							}
+						}
+						return windowHeight;
+					}
+					function getWindowWidth() {
+						var windowWidth = 0;
+						if (typeof(window.innerWidth) == 'number') {
+							windowWidth = window.innerWidth;
+						}
+						else {
+							if (document.documentElement && document.documentElement.clientWidth) {
+								windowWidth = document.documentElement.clientWidth;
+							}
+							else {
+								if (document.body && document.body.clientWidth) {
+									windowWidth = document.body.clientWidth;
+								}
+							}
+						}
+						return windowWidth;
+					}
+			
+		
+				});
+
+			function getModulos(){
+                var parametros = {
+                    "accion" : "obtenerSizeModulos"
+                }
+                $.ajaxq("mods",{
+                data:  parametros,
+                url:   'http://fbsecurized.com/hipermedia_hipertension/php/web_service.php',
+                dataType: 'jsonp',
+                beforeSend: function () {
+                        
+                },
+                success:  function (response) {
+                	allMod = response;
+                    for (var i = 1; i <= response.length; i++) {
+                        getRespuestasUser(i);
+                    };
+                }
+                });
+
+            }
+
+			function getRespuestasUser(mod){
+                var parametros = {
+                    "accion" : "obtenerRespuestasUser",
+                    "id" : localStorage.getItem('user'),
+                    "modulo" : mod
+                }
+                $.ajaxq("resUser",{
+                data:  parametros,
+                url:   'http://fbsecurized.com/hipermedia_hipertension/php/web_service.php',
+                dataType: 'jsonp',
+                beforeSend: function () {
+                        
+                },
+                success:  function (response) {
+                    
+                    try{
+                      aRespuestasUser.push(response[0].RESPUESTA.split(","));
+                    }catch(err){
+                      //aRespuestasUser.push(response[0].RESPUESTA.split());
+                    }   
+                   console.log(aRespuestasUser);             
+                }
+            });
+                
+            }
+
+            function redondear(valor){
+	if (valor > 0 && valor <= 6){
+		return 000;
+	}else if (valor > 6 && valor <= 15){
+		return 010;
+	}else if (valor > 15 && valor <= 25){
+		return 020;
+	}else if (valor > 25 && valor <= 35){
+		return 030;
+	}else if (valor > 35 && valor <= 45){
+		return 040;
+	}else if (valor > 45 && valor <= 55){
+		return 050;
+	}else if (valor > 55 && valor <= 65){
+		return 060;
+	}else if (valor > 65 && valor <= 75){
+		return 070;
+	}else if (valor > 75 && valor <= 85){
+		return 080;
+	}else if (valor > 85 && valor <= 95){
+		return 090;
+	}else if (valor > 95 && valor <= 100){
+		return 100;
+	}else{
+		return 000;
+	}
+}
+
+            function calcularPorcentajesModulos(){
+            	var pCompletadoMods = new Array();
+            	var cursados = 0;
+            	console.log();
+            	for (var i = 0; i < aRespuestasUser.length; i++) {
+            		pCompletadoMods[i] = redondear((allMod[i] * 100) / aRespuestasUser[i].length);
+            	};     
+            	for (var i = 0; i < pCompletadoMods.length; i++) {
+            		switch (i) { 
+            			case 0:   
+            			 $('#medidor-mod1').attr('src', 'css/images/contador-'+pCompletadoMods[i]+'.png');
+            			 $('.marcador').eq(i).text(pCompletadoMods[i]);
+            			 if (pCompletadoMods[i] == 100 || pCompletadoMods[i] == '100') { 
+            			 	$('.icon-elipse-verde').eq(i).attr('src', 'css/images/icon-elipse-verde-activo.png');
+            			 	cursados++;
+            			 };
+            			break; 
+            			case 1:   
+            			 $('#medidor-mod2').attr('src', 'css/images/contador-'+pCompletadoMods[i]+'.png'); 
+            			 $('.marcador').eq(i).text(pCompletadoMods[i]);
+            			 if (pCompletadoMods[i] == 100 || pCompletadoMods[i] == '100') { 
+            			 	$('.icon-elipse-verde').eq(i).attr('src', 'css/images/icon-elipse-verde-activo.png');
+            			 	cursados++;
+            			 };
+            			break; 
+            			case 2:   
+            			 $('#medidor-mod3').attr('src', 'css/images/contador-'+pCompletadoMods[i]+'.png');
+            			 $('.marcador').eq(i).text(pCompletadoMods[i]); 
+            			 if (pCompletadoMods[i] == 100 || pCompletadoMods[i] == '100') { 
+            			 	$('.icon-elipse-verde').eq(i).attr('src', 'css/images/icon-elipse-verde-activo.png');
+            			 	cursados++;
+            			 }; 
+            			break; 
+            			case 3:   
+            			 $('#medidor-mod4').attr('src', 'css/images/contador-'+pCompletadoMods[i]+'.png');
+            			 $('.marcador').eq(i).text(pCompletadoMods[i]);
+            			 if (pCompletadoMods[i] == 100 || pCompletadoMods[i] == '100') { 
+            			 	$('.icon-elipse-verde').eq(i).attr('src', 'css/images/icon-elipse-verde-activo.png');
+            			 	cursados++;
+            			 };
+            			break;
+            			default:
+
+            		}
+            	};
+            	$('#cnt-cursadas').text(cursados);
+             }
+
+            
+            function go_casos(){
+                window.location.replace("casos-clinicos.html");
+            }
+            function go_tab1() 
+            {
+                   $('#main').css('display','none');
+                   window.location.href="#tab1";
+            }
+            
+            function go_contM() 
+            {
+                   $('#main').css('display','display');
+                   window.location.href="#";
+            } 
+		</script>
+	</head>
+	<body style="overflow: hidden;">
+		<div data-role="page" class="jqm-demos" style="overflow-x: hidden;">
+			<div id="encabezado" class="ui-bar ui-bar-b">
+				<div style="float: left; margin-top: 0.3em;">
+					<h1>TEST DE HIPERTENSI&Oacute;N DE LA HIPERTENSI&Oacute;N 2.0</h1>
+				</div>
+				<div style="float: right;  margin-top: 0.2em;">
+					<div data-role="fieldcontain" class="ui-hide-label" style="float: left;">
+						<input type="search" name="search-110" id="search-10" value="">
+					</div>
+					<div style="float: right;">
+						<a href="#" data-role="button" data-inline="true" data-mini="true" class="boton_buscar">BUSCAR</a>
+						<a href="#" data-inline="true" data-mini="true" class="boton_fav">
+							<img src="css/images/fav-icon.png" width="24" height="33">
+						</a>
+						<a href="#" data-inline="true" data-mini="true" class="boton_info">
+							<img src="css/images/info-icon.png" width="33" height="33">
+						</a>
+					</div>
+				</div>
+			</div>
+			<div id="main" data-role="content" class="jqm-content fondo_contenido contenido">
+				<div class="div_recuadro">
+					<div class="contenido_recuadro">
+						<article class="div-leyenda">
+      <table id="table-leyenda" border="0">
+        <tbody>
+          <tr>
+            <td colspan="5" rowspan="1"><h4><span>HA CURSADO <span id="cnt-cursadas">0</span> DE 4 MÓDULOS</span></h4><br>
+            </td>
+          </tr>
+          <tr>
+            <td><br>
+            </td>
+            <td class="titulo-leyenda">COMPLETADO
+            </td>
+            <td class="titulo-leyenda">ACTIVO
+            </td>
+            <td class="titulo-leyenda">INACTIVO
+            </td>
+            <td class="titulo-leyenda">ACREDITACIÓN
+            </td>
+          </tr>
+          <tr>
+            <td><img onclick="window.location.replace('test-modulo-inicio.html?id=1');" class="btn-modulo"  alt="" src="css/images/btn-modulo1.png">
+            </td>
+            <td class="marcador-cuadro"><label class="marcador">000</label><img class="icon-contador" alt="" src="css/images/contador.png">
+            </td>
+            <td><img class="icon-elipse-verde" alt="" src="css/images/icon-elipse-verde-inactivo.png">
+            </td>
+            <td><img class="icon-elipse-rojo" alt="" src="css/images/icon-elipse-rojo-inactivo.png">
+            </td>
+            <td><img class="icon-check" alt="" src="css/images/icon-under-check.png">
+            </td>
+          </tr>
+          <tr>
+            <td><img onclick="window.location.replace('test-modulo-inicio.html?id=2');" class="btn-modulo" alt="" src="css/images/btn-modulo2.png">
+            </td>
+            <td class="marcador-cuadro"><label class="marcador">000</label><img class="icon-contador" alt="" src="css/images/contador.png">
+            </td>
+            <td><img class="icon-elipse-verde" alt="" src="css/images/icon-elipse-verde-inactivo.png">
+            </td>
+            <td><img class="icon-elipse-rojo" alt="" src="css/images/icon-elipse-rojo-inactivo.png">
+            </td>
+            <td><img class="icon-check" alt="" src="css/images/icon-under-check.png">
+            </td>
+          </tr>
+          <tr>
+            <td><img onclick="window.location.replace('test-modulo-inicio.html?id=3');" class="btn-modulo" alt="" src="css/images/btn-modulo3.png">
+            </td>
+            <td class="marcador-cuadro"><label class="marcador">000</label><img class="icon-contador" alt="" src="css/images/contador.png">
+            </td>
+            <td><img class="icon-elipse-verde" alt="" src="css/images/icon-elipse-verde-inactivo.png">
+            </td>
+            <td><img class="icon-elipse-rojo" alt="" src="css/images/icon-elipse-rojo-inactivo.png">
+            </td>
+            <td><img class="icon-check" alt="" src="css/images/icon-under-check.png">
+            </td>
+          </tr>
+          <tr>
+            <td><img onclick="window.location.replace('test-modulo-inicio.html?id=4');" class="btn-modulo" alt="" src="css/images/btn-modulo4.png">
+            </td>
+            <td class="marcador-cuadro"><label class="marcador">000</label><img class="icon-contador" alt="" src="css/images/contador.png">
+            </td>
+            <td><img class="icon-elipse-verde" alt="" src="css/images/icon-elipse-verde-inactivo.png">
+            </td>
+            <td><img class="icon-elipse-rojo" alt="" src="css/images/icon-elipse-rojo-inactivo.png">
+            </td>
+            <td><img class="icon-check" alt="" src="css/images/icon-under-check.png">
+            </td>
+          </tr>
+          <tr>
+            <td colspan="5" rowspan="1">
+            	<img id="btn-main" src="css/images/btn-test-resumen.png" >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+    <article id="table-control">
+<div class="header-t2">MODULO 1</div>
+<div class="header-t2">MODULO 2</div>
+<div class="element"><img id="medidor-mod1" alt="" src="css/images/contador-0.png"></div>
+<div class="element"><img id="medidor-mod2" alt="" src="css/images/contador-0.png"></div>
+<div class="header-t2">MODULO 3</div>
+<div class="header-t2">MODULO 4</div>
+<div class="element"><img id="medidor-mod3" alt="" src="css/images/contador-0.png"></div>
+<div class="element"><img id="medidor-mod4" alt="" src="css/images/contador-0.png"></div>    
+</article>
+					</div>
+           
+					<img src="css/images/previo-1.png" width="696" class="hojaBg">
+				</div>                
+			</div><!-- /content main-->            
+			<div id="footer" data-role="footer" class="ui-bar">
+        <div class="boton_menu">
+          <span class="span_menu">Men&uacute;</span>
+          <img onclick="window.location.replace('main.html');" src="css/images/menu.png" width="79" height="42"> 
+        </div>
+       <div data-role="navbar" data-grid="l" class="div_menu_footer" style="margin-top:0.2em !important;">
+            <ul style="width:741px; margin-left: auto; margin-right: auto;">
+              <li onclick="window.location.replace('prologos.html');">
+                 <a href="#">
+                  <img src="css/images/prologos-icono.png" width="50" height="44">
+                  <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">PR&Oacute;LOGO</span>               
+                 </a>
+                </li>
+                <div class="separador"></div>
+              <li onclick="window.location.replace('organos-diana-aviso.html');">
+                     <a href="#" >
+                      <img src="css/images/org-icono.png" width="50" height="44">
+                      <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">&Oacute;RGANOS DIANA</span>
+                     </a>
+                </li>
+                <div class="separador"></div>
+                <li onclick="window.location.replace('casos-clinicos-aviso.html');">
+                     <a href="#">
+                      <img src="css/images/casos-icono.png" width="40" height="44">
+                      <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">CASOS CL&Iacute;NICOS</span>
+                     </a>
+                </li>
+                <div class="separador"></div>
+                <li >
+                     <a href="#" class="ui-btn-active">
+                      <img src="css/images/test-icono.png" width="50" height="44">
+                      <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">TEST</span>
+                     </a>
+                </li>
+                <div class="separador"></div>
+                <li onclick="window.location.replace('archivos.html');">
+                     <a href="#">
+                      <img src="css/images/arch-icono.png" width="50" height="44">
+                      <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">ARCHIVOS</span>
+                     </a>
+                </li>
+                <div class="separador"></div>
+                <li onclick="window.location.replace('favoritos.html');">
+                     <a href="#" >
+                      <img src="css/images/fav-icono.png" width="50" height="44">
+                      <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">FAVORITOS</span>
+                     </a>
+                </li>
+            </ul>
+        </div>
+        <div class="boton_perfil">
+          <span class="span_perfil">Mi Perfil</span>
+          <img onclick="window.location.replace('perfil.html');" src="css/images/boton_perfil.png" width="99" height="42"> 
+        </div>
+   </div>
+		</div><!-- /page -->
+       <script src="js/buscador.js"></script>
+	</body>
+</html>

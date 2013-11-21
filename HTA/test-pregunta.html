@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html style="overflow: hidden;">
+<head>
+    <title>TEST</title> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 minimum-scale=1.0 user-scalable=no target-densityDpi=device-dpi"/>
+    <link rel="stylesheet" href="css/jquery.mobile-1.3.1.css" />
+    <!-- styles needed by jScrollPane - include in your own sites -->
+    <link rel="stylesheet" href="css/style.css"/>
+    <style type="text/css" id="page-css">
+        /* Styles specific to this particular page */
+        .scroll-pane
+        {
+            height: 400px;
+            overflow: visible;
+			font-size:16px;
+			margin-top:5px;
+        }
+        .horizontal-only
+        {
+            height: auto;
+            max-height: 200px;
+        }
+        
+        .imagen-quest{
+            display: inline-block;
+            width: 232px;
+            height: auto;
+            float: right;
+            margin-right: 5%;
+            display:none;
+        }
+        
+        .question{
+            border: solid 2px #000;
+            -webkit-border-radius: 12px;
+            -moz-border-radius: 12px;
+            -ms-border-radius: 12px;
+            -o-border-radius: 12px;
+            border-radius: 12px;
+            margin-right: 5%;
+            margin-left: 5%;
+            position: relative;
+            top: 5%;
+            font-size: 1rem;
+            font-family: arial;
+        }
+        
+        .resp-question{
+            border: solid 2px #000;
+            -webkit-border-radius: 12px;
+            -moz-border-radius: 12px;
+            -ms-border-radius: 12px;
+            -o-border-radius: 12px;
+            border-radius: 12px;
+            margin-left: 5%;
+            margin-top: 0.5%;
+            font-size: 0.9rem;
+            padding-right: 1%;
+            padding-left: 1%;
+            display: block;
+            float: left;
+            width: auto;
+            max-width: 60%;
+            display:none;
+        }
+        
+        .question ul{
+            list-style-type:none;
+            padding-left:0px;
+            -webkit-margin-before:0;
+            -webkit-margin-after:0;
+            -o-margin-before:0;
+            -o-margin-after:0;
+            -moz-margin-before:0;
+            -moz-margin-after:0;
+            -ms-margin-before:0;
+            -ms-margin-after:0;
+            margin-bottom:0;
+            margin-top:0;            
+        }
+        
+        .seleccionado{
+            background-color: #e8671e;
+            -webkit-box-shadow: 1px 1px 2px rgba(255,255,255,.83), inset 0 6px 14px rgba(0,0,0,.3);
+            -moz-box-shadow: 1px 1px 2px rgba(255,255,255,.83), inset 0 6px 14px rgba(0,0,0,.3);
+	       box-shadow: 1px 1px 2px rgba(255,255,255,.83), inset 0 6px 14px rgba(0,0,0,.3);
+	       background-image:url(css/images/icon-valid-quest.png);
+            background-repeat:no-repeat;
+            background-position:right;
+            background-size:35px;  
+        }
+        
+        .fail{
+            background-image:url(css/images/icon-fail-quest.png);
+            background-repeat:no-repeat;
+            background-position:right;
+            background-size:30px; 
+        }
+        
+        
+        
+        .ultimo {
+            -webkit-border-radius: 0px 0px 12px 12px;
+            -moz-border-radius: 0px 0px 12px 12px;
+            -ms-border-radius: 0px 0px 12px 12px;
+            -o-border-radius: 0px 0px 12px 12px;
+            border-radius: 0px 0px 12px 12px;
+        }
+        
+        #btn-quest-text {
+            font-family: Arial;
+            font-weight:500;            
+            font-size:1rem;
+        }
+        
+        .incorrect{
+            margin-left: 2.5em; 
+            color:#000;
+        }
+        
+        .correct{
+            margin-left: 3em;
+            color:#000;
+        }
+        
+        #btn-quest{
+            text-align: center;
+            height: 40px;
+            width: 197px;
+            margin-left: 4.8%;
+            margin-top: 3%;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position:left;
+            background-image: url(css/images/btn-valid-quest.png);
+            cursor: pointer;
+        }
+        
+        .ui-slider{
+            width: 25%;
+            float:left;
+            margin-left: 50%;
+        }
+        
+        .btn-continuar-quest{
+            text-align: center;
+            height: 40px;
+            width: 162px;
+            margin-right:3.5%;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position:left;
+            background-image: url(css/images/btn-continuar-quest.png);
+            cursor: pointer;
+            float:right;
+            
+        }
+        
+        .btn-continuar-quest:active{
+            background-image: url(css/images/btn-continuar-quest-activo.png);
+                       
+        }
+        
+        .btn-saltar-quest{
+            text-align: center;
+            height: 40px;
+            width: 162px;
+            margin-right:3.5%;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position:left;
+            background-image: url(css/images/saltar-pregunta-quest.png);
+            cursor: pointer;
+            float:right;
+            
+        }
+        
+        .btn-saltar-quest:active{
+            background-image: url(css/images/saltar-pregunta-quest.png);
+                       
+        }
+        
+        .bck-progress{
+            border: 0px transparent;
+            -webkit-box-shadow: 1px 1px 2px rgba(255,255,255,.83), inset 0 6px 14px rgba(0,0,0,.3);
+	-moz-box-shadow: 1px 1px 2px rgba(255,255,255,.83), inset 0 6px 14px rgba(0,0,0,.3);
+	box-shadow: 1px 1px 2px rgba(255,255,255,.83), inset 0 6px 14px rgba(0,0,0,.3);
+	background-image: -webkit-linear-gradient(bottom, #ec8026, #e44c16);
+	background-image: -moz-linear-gradient(bottom, #ec8026, #e44c16);
+	background-image: -o-linear-gradient(bottom, #ec8026, #e44c16);
+	background-image: linear-gradient(to top, #ec8026, #e44c16);
+        }
+        
+        .bar-progress{
+            -webkit-box-shadow: 2px 2px 6px rgba(255,255,255,.83), inset 0 6px 14px rgba(0,0,0,.3);
+	-moz-box-shadow: 2px 2px 6px rgba(255,255,255,.83), inset 0 6px 14px rgba(0,0,0,.3);
+	box-shadow: 2px 2px 6px rgba(255,255,255,.83), inset 0 6px 14px rgba(0,0,0,.3);
+	background-image: -webkit-linear-gradient(bottom, #007fa1, #017392);
+	background-image: -moz-linear-gradient(bottom, #007fa1, #017392);
+	background-image: -o-linear-gradient(bottom, #007fa1, #017392);
+	background-image: linear-gradient(to top, #007fa1, #017392);
+        }
+        
+        #btn-quest:active{
+            background-image:url(css/images/btn-valid-quest-push.png);
+        }
+        
+        .question ul li{
+            padding: 1% 0 1% 0;
+            border-bottom: #cecece solid 1px; 
+        }
+        
+        .opcion, .opcion label{
+            cursor:pointer;
+        }
+        
+        .question ul li:first-child{
+            color: #005f78;
+	       font-size: 1.3rem;
+            text-shadow: 2px 2px 6px rgba(255,255,255,.83), inset 0 6px 14px rgba(0,0,0,.3);
+        }
+        
+        .question ul li:last-child{
+            border-bottom-color:transparent; 
+            -webkit-border-radius: 0px 0px 12px 12px;
+            -moz-border-radius: 0px 0px 12px 12px;
+            -ms-border-radius: 0px 0px 12px 12px;
+            -o-border-radius: 0px 0px 12px 12px;
+            border-radius: 0px 0px 12px 12px;
+        }
+        
+        .boton_plus{
+            background-color: transparent !important;
+            border-color: transparent !important;
+            cursor: pointer;
+            display: inline-block;
+                vertical-align: middle;
+            float: right;
+            position: relative;
+            margin-top: -20%;
+            margin-right: 1%;
+            margin-left: 0;
+        }
+        
+        .boton_plus:active{
+            margin-top:-19%;
+        }
+                
+        .question ul li label{
+            padding-left: 2%;
+            padding-left:1.5%;
+            text-shadow: transparent !important;            
+        }
+        
+        input[type="radio"]{
+            
+        }
+        
+            
+		
+		.ui-btn-hover-c{
+			background: #d24c16;
+			background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIxJSIgc3RvcC1jb2xvcj0iI2QyNGMxNiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUzJSIgc3RvcC1jb2xvcj0iI2U4NjcxZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlNzdjMjQiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+			background: -moz-linear-gradient(top, #d24c16 1%, #e8671e 53%, #e77c24 100%); 
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#d24c16), color-stop(53%,#e8671e), color-stop(100%,#e77c24)); 
+			background: -webkit-linear-gradient(top, #d24c16 1%,#e8671e 53%,#e77c24 100%); 
+			background: -o-linear-gradient(top, #d24c16 1%,#e8671e 53%,#e77c24 100%); 
+			background: -ms-linear-gradient(top, #d24c16 1%,#e8671e 53%,#e77c24 100%);
+			background: linear-gradient(to bottom, #d24c16 1%,#e8671e 53%,#e77c24 100%);
+		}
+    </style>
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.mobile-1.3.1.js"></script>
+    <script src="js/jquery.ajaxq-0.0.1.js"></script>
+    <script src="js/jquery.fittext.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    function verify(){
+        console.log("verificando...");
+        $( ".opcion" ).off( "click" );
+        $( "#btn-quest" ).off( "click" );
+            //Si contestó correctamente
+            if($('.seleccionado').attr('data-sol') == '1'){
+                $('.seleccionado').css('background-image', 'url(css/images/icon-correct-quest.png)');
+                $('#btn-quest').css('background-image', 'url(css/images/btn-correct-quest.png)');                
+                return true;
+            }else{
+                $('.opcion[data-sol="1"]').css('background-color', '#eb9d9d'); 
+                $('.opcion[data-sol="1"]').addClass('fail');
+                $('#btn-quest').css('background-image', 'url(css/images/btn-failed-quest.png)');
+                return false;
+            }
+             
+        };
+    
+    $( document ).on( "pageshow", function(){
+        $('#n-quest').text(getUrlVars('q'));
+            $('#slider-fill').attr('value', getUrlVars('q'));
+            $('#slider-fill').slider("refresh");
+        getCuestion();
+        /*Progress BAR*/
+         $('.ui-slider').find('input').hide();
+            $('.ui-slider').find('input').css('margin-left','-9999px'); // Fix for some FF versions
+            $('.ui-slider').find('.ui-slider-track').css('margin','0 15px 0 15px');
+            $('.ui-slider').find('.ui-slider-handle').hide();
+            $('.ui-slider').css('margin', '0.3em 0em 0 17%');
+            $('.ui-slider-track').addClass('bck-progress');
+            $('.ui-slider-bg').addClass('bar-progress');
+            $('.opcion').fitText(7.7);
+                
+        $( ".opcion" ).on( "click", function() {
+            
+            if ($(this).hasClass("seleccionado")){
+                $(this).removeClass("seleccionado");
+            }else{
+                $('.question ul li').removeClass("seleccionado");
+                $(this).addClass("seleccionado"); 
+                if ($('.opcion').last().hasClass('seleccionado') == true) {
+                    $(this).addClass('ultimo');
+                };               
+            }
+                
+        });
+
+        function siguientePregunta(){
+            var parametros = {
+                    "accion" : "obtenerSigPregunta",
+                    "question" : localStorage.getItem('question'),
+                    "modulo" : getUrlVars('mod')
+                }
+                $.ajaxq("saveQuest",{
+                data:  parametros,
+                url:   'http://fbsecurized.com/hipermedia_hipertension/php/web_service.php',
+                dataType: 'jsonp',
+                beforeSend: function () {
+                        
+                },
+                success:  function (response) {
+                    localStorage.setItem('question', response);
+                    var q = getUrlVars('q');
+                    q++;
+                     window.location.replace('test-pregunta.html?q='+q+'&mod='+getUrlVars('mod'));
+                }
+                });
+        }
+
+        $('#btn-salt-cont-quest').on("click", function (){
+            if($(this).hasClass('btn-saltar-quest') == true){
+                 sendRespuesta2("0");
+            }else{
+                siguientePregunta();
+            }
+            
+        });
+
+        function sendRespuesta2(seleccionado){
+                var parametros = {
+                    "accion" : "guardarRespuesta",
+                    "question" : localStorage.getItem('question'),
+                    "respuesta" : seleccionado,
+                    "user" : localStorage.getItem('user'),
+                    "modulo" : getUrlVars('mod'),
+                    "nQuest" : getUrlVars('q')
+                }
+                $.ajaxq("saveQuest",{
+                data:  parametros,
+                url:   'http://fbsecurized.com/hipermedia_hipertension/php/web_service.php',
+                dataType: 'jsonp',
+                beforeSend: function () {
+                        
+                },
+                success:  function (response) {
+                    siguientePregunta();
+                }
+                });
+           
+        }
+
+        function sendRespuesta(seleccionado){
+                var parametros = {
+                    "accion" : "guardarRespuesta",
+                    "question" : localStorage.getItem('question'),
+                    "respuesta" : seleccionado,
+                    "user" : localStorage.getItem('user'),
+                    "modulo" : getUrlVars('mod'),
+                    "nQuest" : getUrlVars('q')
+                }
+                $.ajaxq("saveQuest",{
+                data:  parametros,
+                url:   'http://fbsecurized.com/hipermedia_hipertension/php/web_service.php',
+                dataType: 'jsonp',
+                beforeSend: function () {
+                        
+                },
+                success:  function (response) {
+                    console.log(response);
+                }
+                });
+           
+        }
+        
+        $( "#btn-quest" ).on( "click", function() {
+            if ($('.seleccionado').length != 0){
+                sendRespuesta($('.seleccionado').attr('data-op'));
+                verify();
+                $('.resp-question').show();
+                $('.imagen-quest').show();
+                $('#btn-salt-cont-quest').removeClass('btn-saltar-quest');
+                $('#btn-salt-cont-quest').addClass('btn-continuar-quest');
+
+
+            }            
+        });
+
+        
+       
+	   calcular()
+        
+	   window.addEventListener("resize", function(){
+                            location.reload();
+						}, true);       
+        });
+
+        function getCuestion(){            
+
+            var parametros = {
+                    "accion" : "obtenerPregunta",
+                    "question" : localStorage.getItem('question'),
+                    "modulo" : getUrlVars('mod')
+                }
+                $.ajaxq("getQuest",{
+                data:  parametros,
+                url:   'http://fbsecurized.com/hipermedia_hipertension/php/web_service.php',
+                dataType: 'jsonp',
+                beforeSend: function () {
+                        
+                },
+                success:  function (response) {
+                    var orden = ['a)', 'b)', 'c)', 'd)', 'e)', 'f)'];
+                    var i = 0;
+                    
+                    $('.pregunta-text label').text(response.QUESTION[0].PREGUNTA);
+                    $('.resp-question p').text(response.QUESTION[0].DESCRIPCION);
+                    var galeria = response.QUESTION[0].GALERIA;
+                    $(response.OPCIONES).each(function (){
+                        $('.opcion label').eq(i).text(orden[i]+' '+$(this)[0].TEXTO_OPCION); 
+                        $('.opcion').eq(i).attr('data-sol', $(this)[0].CORRECTA);
+                        $('.opcion').eq(i).attr('data-op', $(this)[0].ID_OPCION);                      
+                        i++;
+                    });
+                }
+                });
+        }
+        
+        function getWindowHeight() {
+				var windowHeight = 0;
+				if (typeof(window.innerHeight) == 'number') {
+					windowHeight = window.innerHeight;
+				}
+				else {
+					if (document.documentElement && document.documentElement.clientHeight) {
+						windowHeight = document.documentElement.clientHeight;
+					}
+					else {
+						if (document.body && document.body.clientHeight) {
+							windowHeight = document.body.clientHeight;
+						}
+					}
+				}
+				return windowHeight;
+			}
+        
+    function calcular(){
+        //barra superior		
+	   var hencab_1= $('#encabezado').css('height');
+	   var pencab= $('#encabezado').css('padding-top');
+	   var valor_enca1 = hencab_1.substr(0, (hencab_1.length - 2));
+	   var valorp = 2 * (pencab.substr(0, (pencab.length - 2)));
+	   var total_1 = parseFloat(valor_enca1) + parseFloat(valorp);
+	   //barra del footer
+	   var footer= $('#footer').css('height');
+	   var valor_footer = footer.substr(0, (footer.length - 2));
+	   var topfooter= $('#footer').css('padding-top');
+	   var valor_topfooter = topfooter.substr(0, (topfooter.length - 2));
+	   var bottomfooter= $('#footer').css('padding-bottom');
+	   var valor_bottomfooter = bottomfooter.substr(0, (bottomfooter.length - 2));
+	   var total_2 = parseFloat(valor_footer) + parseFloat(valor_topfooter) + parseFloat(valor_bottomfooter) ;
+	   //contenido
+	   var topcontenido= $('#contenido').css('padding-top');
+	   var bottomcontenido= $('#contenido').css('padding-bottom');
+	   var valor_top = topcontenido.substr(0, (topcontenido.length - 2));
+	   var valor_bottom = bottomcontenido.substr(0, (bottomcontenido.length - 2));
+	   var total_3= parseFloat(valor_top) + parseFloat(valor_bottom) ;
+
+	   var hcontenido = getWindowHeight() - total_1 - total_2- total_3;
+       $('.fondo_contenido').css('height', hcontenido);
+	   
+	   	   
+	   //menu inferior
+	   var afooter = $('#footer').css('width');
+	   var valor_footer = afooter.substr(0, (afooter.length - 2));
+	   
+	   var wbotonmenu = $('.boton_menu').css('width');
+	   var valor_menu = wbotonmenu.substr(0, (wbotonmenu.length - 2));
+	   var pbotonmenu = $('.boton_menu').css('margin-left');
+	   var valor_pmenu = pbotonmenu.substr(0, (pbotonmenu.length - 2));
+	   var total_menu = parseFloat(valor_menu) + parseFloat(valor_pmenu);
+	   
+	   var wbotonperfil = $('.boton_perfil').css('width');
+	   var valor_perfil = wbotonperfil.substr(0, (wbotonperfil.length - 2));
+	   var pbotonperfil = $('.boton_perfil').css('margin-right');
+	   var valor_pperfil = pbotonperfil.substr(0, (pbotonperfil.length - 2));
+	   var total_perfil = parseFloat(valor_perfil) + parseFloat(valor_pperfil);
+	   
+	   var wmenu = $('.div_menu_footer').css('width');
+	   var valor_wmenu = wmenu.substr(0, (wmenu.length - 2));
+
+	   var total_margin_menu = (parseFloat(valor_footer) - parseFloat(total_menu) - parseFloat(total_perfil) - parseFloat(valor_wmenu))/2;
+	   $('.div_menu_footer').css('margin-left', total_margin_menu);
+	  
+	   
+	  /* var pl_cont= $('#div_cont').css('margin-left');
+	   var valor_pl_contt = pl_cont.substr(0, (pl_cont.length - 2));
+	   var pr_cont= $('#div_cont').css('margin-right');
+	   var valor_pr_cont = pr_cont.substr(0, (pr_cont.length - 2));
+	   
+	   var total_divcont = valor_div_cont-valor_pl_contt-valor_pr_cont;*/
+	   	   
+        if(window.innerHeight > window.innerWidth){
+                                $('.div-text').css('width', '22%');
+                                $('.jspPane').css('width', '96%');
+                            }else{
+                                $('.div-text').css('width', '40%');
+                                $('.jspPane').css('width', '98%');
+                            }	   
+	   $('.scroll-pane').css('width', '100%');
+	   $('.jspContainer').css('width', '100%');	   
+        
+    }
+        
+        function getUrlVars(VarSearch){
+	   var SearchString = window.location.search.substring(1);
+	   var VariableArray = SearchString.split('&');
+	       for(var i = 0; i < VariableArray.length; i++){
+		      var KeyValuePair = VariableArray[i].split('=');
+		          if(KeyValuePair[0] == VarSearch){
+			         return KeyValuePair[1];
+		          }
+	       }
+    }
+    
+	
+</script>
+</head>
+<body>
+<div data-role="page" class="jqm-demos">
+    <div id="encabezado" class="ui-bar ui-bar-b">
+        <div style="float: left; margin-top: 0.2em; margin-left:5em;">
+            <h1 id="cabecera-text">PREGUNTA <span id="n-quest"></span> DE 40</h1>
+        </div>
+        <div >            
+                <input data-inline="true" type="range" name="slider-fill" id="slider-fill" value="23" min="0" max="40" data-highlight="true" />
+                <div data-inline="true" class="btn-saltar-quest" id="btn-salt-cont-quest"></div>
+        </div>
+    </div>
+    <div id="contenido" data-role="content" class="jqm-content fondo_contenido" style="padding:0px !important; background-color:#FFF;">
+         <article class="question">
+            <ul>
+                <li class="pregunta-text"><label>En el caso de una HVI ¿cuáles de las siguientes afirmaciones son correctas?</label></li>
+                <li class="opcion" data-sol="0" data-op=""><label></label></li>
+                <li class="opcion" data-sol="0" data-op=""><label></label></li>
+                <li class="opcion" data-sol="0" data-op=""><label></label></li>
+                <li class="opcion" data-sol="0" data-op=""><label></label></li>
+                <li class="opcion" data-sol="1" data-op=""><label></label></li>
+             </ul>             
+         </article>
+        <div id="btn-quest">
+        </div>        
+        <article class="resp-question">
+            <p>
+            La respuesta correcta es:
+El soplo mesosistólico de eyección está siempre claramente separado del primer ruido, ya que la estenosis muscular se 	constituye en el curso de la sístole.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ipsum dolor, placerat eu semper quis, consequat laoreet eros. Nam id risus eget mauris blandit ultricies. Nunc id accumsan turpis. Donec nec erat ipsum. Integer blandit tortor non leo adipiscing euismod. Donec ac dui mauris. Proin non nisl nunc, sed ultricies tortor. Maecenas eu sem sem, vel gravida felis. Aenean id vehicula mauris.
+            </p>
+        </article>
+        <article class="imagen-quest">
+            <img src="css/images/imagen-quest.png" height="220">
+            <a href="#" data-inline="true" data-mini="true" class="boton_plus" style="float:right">
+             <img src="css/images/plus-icon.png" width="40" height="40">
+           </a>
+        </article>
+     </div><!-- /content -->
+   <div id="footer" data-role="footer" class="ui-bar">
+        <div class="boton_menu">
+          <span class="span_menu">Men&uacute;</span>
+          <img onclick="window.location.replace('main.html');" src="css/images/menu.png" width="79" height="42"> 
+        </div>
+       <div data-role="navbar" data-grid="l" class="div_menu_footer" style="margin-top:0.2em !important;">
+            <ul style="width:741px; margin-left: auto; margin-right: auto;">
+              <li onclick="window.location.replace('prologos.html');">
+                 <a href="#">
+                  <img src="css/images/prologos-icono.png" width="50" height="44">
+                  <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">PR&Oacute;LOGO</span>               
+                 </a>
+                </li>
+                <div class="separador"></div>
+              <li onclick="window.location.replace('organos-diana-aviso.html');">
+                     <a href="#" >
+                      <img src="css/images/org-icono.png" width="50" height="44">
+                      <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">&Oacute;RGANOS DIANA</span>
+                     </a>
+                </li>
+                <div class="separador"></div>
+                <li onclick="window.location.replace('casos-clinicos-aviso.html');">
+                     <a href="#">
+                      <img src="css/images/casos-icono.png" width="40" height="44">
+                      <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">CASOS CL&Iacute;NICOS</span>
+                     </a>
+                </li>
+                <div class="separador"></div>
+                <li >
+                     <a href="#" class="ui-btn-active">
+                      <img src="css/images/test-icono.png" width="50" height="44">
+                      <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">TEST</span>
+                     </a>
+                </li>
+                <div class="separador"></div>
+                <li onclick="window.location.replace('archivos.html');">
+                     <a href="#">
+                      <img src="css/images/arch-icono.png" width="50" height="44">
+                      <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">ARCHIVOS</span>
+                     </a>
+                </li>
+                <div class="separador"></div>
+                <li onclick="window.location.replace('favoritos.html');">
+                     <a href="#" >
+                      <img src="css/images/fav-icono.png" width="50" height="44">
+                      <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">FAVORITOS</span>
+                     </a>
+                </li>
+            </ul>
+        </div>
+        <div class="boton_perfil">
+          <span class="span_perfil">Mi Perfil</span>
+          <img onclick="window.location.replace('perfil.html');" src="css/images/boton_perfil.png" width="99" height="42"> 
+        </div>
+   </div>
+</div><!-- /page -->
+<script src="js/buscador.js"></script>
+</body>
+</html>

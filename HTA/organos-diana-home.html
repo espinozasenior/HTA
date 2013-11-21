@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--[if gte IE 9]>
+  <style type="text/css">
+    .ui-bar-b, .ui-bar-a {
+       filter: none;
+    }
+  </style>
+<![endif]-->
+    <title>&Oacute;RGANOS DIANA</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="css/jquery.mobile-1.3.1.css" />
+    <link rel="stylesheet" href="css/style.css"/>
+    <style type="text/css" id="page-css">
+        /* Styles specific to this particular page */
+        .ui-btn-up-c{
+			background: #da4c35; 
+			background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiNkYTRjMzUiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiNhYzFlMDciIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+			background: -moz-linear-gradient(top, #da4c35 50%, #ac1e07 50%); 
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#da4c35), color-stop(50%,#ac1e07)); 
+			background: -webkit-linear-gradient(top, #da4c35 50%,#ac1e07 50%);
+			background: -o-linear-gradient(top, #da4c35 50%,#ac1e07 50%); 
+			background: -ms-linear-gradient(top, #da4c35 50%,#ac1e07 50%);
+			background: linear-gradient(to bottom, #da4c35 50%,#ac1e07 50%); 
+			border: 0px !important;
+			color:#FFF !important;
+			margin: 3px 3px 3px 3px;
+		}
+
+		#footer{
+			text-align: center;
+		}
+		
+		.ui-btn-hover-c{
+			background: #da4c35; 
+			background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiNkYTRjMzUiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiNhYzFlMDciIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+			background: -moz-linear-gradient(top, #da4c35 50%, #ac1e07 50%);
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#da4c35), color-stop(50%,#ac1e07));
+			background: -webkit-linear-gradient(top, #da4c35 50%,#ac1e07 50%); 
+			background: -o-linear-gradient(top, #da4c35 50%,#ac1e07 50%); 
+			background: -ms-linear-gradient(top, #da4c35 50%,#ac1e07 50%);
+			background: linear-gradient(to bottom, #da4c35 50%,#ac1e07 50%); 
+			border: 0px !important;
+			color:#FFF !important;
+			margin: 3px 3px 3px 3px;
+		}
+			
+		.ui-btn-up-c, .ui-btn-hover-c{
+			font-family:Arial, Helvetica, sans-serif !important;
+			font-weight:inherit !important;
+		}
+    </style>
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.mobile-1.3.1.js"></script>
+	<script>
+        window.onload = function(){
+			
+			calculos();
+	   
+			window.addEventListener("resize", function(){
+			   calculos();   
+			}, true);
+				
+		   
+        };
+        
+        function calculos(){
+            
+            //barra del footer
+						var footer= $('#footer').css('height');
+						var valor_footer = footer.substr(0, (footer.length - 2));
+						var topfooter= $('#footer').css('padding-top');
+						var valor_topfooter = topfooter.substr(0, (topfooter.length - 2));
+						var bottomfooter= $('#footer').css('padding-bottom');
+						var valor_bottomfooter = bottomfooter.substr(0, (bottomfooter.length - 2));
+						var total_2 = parseFloat(valor_footer) + parseFloat(valor_topfooter) + parseFloat(valor_bottomfooter) ;
+			   
+			   var hencab= $('#encabezado').css('height');	
+			   var pencab= $('#encabezado').css('padding-top');
+			   var wcontenido= $('#contenido').css('width');
+			   
+			   var ptcontenido= $('#contenido').css('padding-top');
+			   var pbcontenido= $('#contenido').css('padding-bottom');
+			   
+			   var valorptcontenido= ptcontenido.substr(0, (ptcontenido.length - 2));
+			   var valorpbcontenido= pbcontenido.substr(0, (pbcontenido.length - 2));
+			   
+			   var valorp = 2 * (pencab.substr(0, (pencab.length - 2)));
+			   var valor2= hencab.substr(0, (hencab.length - 2));
+			   var valor3= wcontenido.substr(0, (wcontenido.length - 2));
+				
+			   var hcontenido = getWindowHeight() - valor2 - valorp - total_2 - valorptcontenido - valorpbcontenido;
+		
+			   $('.fondo_contenido').css('height', hcontenido);
+			   $('.fondo_contenido').css('overflow', 'hidden');
+            
+			   var cont_h = $('#conte').css('height');
+			   var valor_cont = cont_h.substr(0, (cont_h.length - 2));
+			   var total = (hcontenido - parseFloat(valor_cont))/3;
+			   
+			   $('.div-menu-principal').css('margin-top', total);
+		       $('.div-menu-principal').css('margin-bottom', total); 
+			   $('#inferior').css('margin-top', total); 
+			  
+            
+		   }		
+           
+		   
+           function getWindowHeight() {
+                    var windowHeight = 0;
+                    if (typeof(window.innerHeight) == 'number') {
+                        windowHeight = window.innerHeight;
+                    }
+                    else {
+                        if (document.documentElement && document.documentElement.clientHeight) {
+                            windowHeight = document.documentElement.clientHeight;
+                        }
+                        else {
+                            if (document.body && document.body.clientHeight) {
+                                windowHeight = document.body.clientHeight;
+                            }
+                        }
+                    }
+                    return windowHeight;
+                }
+    </script>
+
+</head>
+<body>
+<div data-role="page" class="jqm-demos">
+    <div id="encabezado" class="ui-bar ui-bar-b">
+        <div style="float: left; margin-top: 0.3em;">
+            <h1>&Oacute;RGANOS DIANA</h1>
+        </div>
+        <div style="float: right;  margin-top: 0.2em;">
+            <div data-role="fieldcontain" class="ui-hide-label" style="float: left;">
+                <input type="search" name="search-110" id="search-10" value="">
+            </div>
+            <div style="float: right;">
+                <a href="#" data-role="button" data-inline="true" data-mini="true" class="boton_buscar">BUSCAR</a>
+                <a href="#" data-inline="true" data-mini="true" class="boton_info">
+                    <img src="css/images/info-icon.png" width="33" height="33">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="contenido" data-role="content" class="jqm-content fondo_contenido">
+        <div id="conte" class="div-menu-principal">
+          <div id="superior">
+            <div onclick="window.location.replace('organo-detalle.html?organo=6');" id="prologo" class="fondo_apartado" style="float:left;">
+                <p class="letras_apartado" style="margin-bottom:8px;">
+                    CORAZ&Oacute;N
+                </p>
+       	    	<img src="css/images/1.png" width="120" height="139" class="imagen_apartado"> 
+             </div>
+            <div onclick="window.location.replace('organo-detalle.html?organo=2');" id="organos"  class="fondo_apartado" style="margin-left:60px; margin-right:60px;">
+                <p class="letras_apartado" style=" margin-bottom:0px">
+                    RI&Ntilde;&Oacute;N
+                </p>
+                <img src="css/images/2.png" width="120" height="130" class="imagen_apartado">
+            </div onclick="window.location.replace('organo-detalle.html?organo=3');">
+            <div id="casos" class="fondo_apartado" style="float:right;">
+                <p class="letras_apartado" style=" margin-bottom:8px">
+                    CEREBRO
+                </p>
+                <img src="css/images/3.png" width="100" height="120" style="margin-left:50px; margin-right:50px">
+            </div>
+         </div>
+          <div id="inferior">
+            <div onclick="window.location.replace('organo-detalle.html?organo=5');" id="test" class="fondo_apartado" style="float:left;">
+                <p class="letras_apartado">
+                    AUDICI&Oacute;N
+                </p>
+                <img src="css/images/4.png" width="120" height="131" class="imagen_apartado">
+            </div>
+            <div onclick="window.location.replace('organo-detalle.html?organo=1');" id="archivos" class="fondo_apartado" style="margin-left:60px; margin-right:60px;">
+                <p class="letras_apartado">
+                   VISI&Oacute;N
+                </p>
+                <img src="css/images/5.png" width="120" height="129" class="imagen_apartado">
+            </div>
+            <div onclick="window.location.replace('organo-detalle.html?organo=4');" id="favoritos" class="fondo_apartado" style="float:right;">
+                <p class="letras_apartado" style="margin-bottom: 0px;">
+                    SISTEMA ARTERIAL
+                </p>
+               <img src="css/images/6.png" width="120" height="127" class="imagen_apartado" >
+           </div>
+          </div>
+                
+        </div>
+        
+    </div>
+    
+    <!-- /content -->
+    <div id="footer" data-role="footer" class="ui-bar">
+        <div class="boton_menu">
+          <span class="span_menu">Men&uacute;</span>
+          <img onclick="window.location.replace('main.html');" src="css/images/menu.png" width="79" height="42"> 
+        </div>
+       <div data-role="navbar" data-grid="l" class="div_menu_footer" style="margin-top:0.2em !important;">
+            <ul style="width:741px; margin-left: auto; margin-right: auto;">
+              <li onclick="window.location.replace('prologos.html');">
+                 <a href="#">
+                  <img src="css/images/prologos-icono.png" width="50" height="44">
+                  <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">PR&Oacute;LOGO</span>               
+                 </a>
+                </li>
+                <div class="separador"></div>
+              <li>
+                     <a href="#" class="ui-btn-active">
+                      <img src="css/images/org-icono.png" width="50" height="44">
+                      <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">&Oacute;RGANOS DIANA</span>
+                     </a>
+                </li>
+                <div class="separador"></div>
+                <li onclick="window.location.replace('casos-clinicos-aviso.html');">
+                     <a href="#">
+                      <img src="css/images/casos-icono.png" width="40" height="44">
+                      <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">CASOS CL&Iacute;NICOS</span>
+                     </a>
+                </li>
+                <div class="separador"></div>
+                <li onclick="window.location.replace('test-previo.html');">
+                     <a href="#">
+                      <img src="css/images/test-icono.png" width="50" height="44">
+                      <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">TEST</span>
+                     </a>
+                </li>
+                <div class="separador"></div>
+                <li onclick="window.location.replace('archivos.html');">
+                     <a href="#">
+                      <img src="css/images/arch-icono.png" width="50" height="44">
+                      <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">ARCHIVOS</span>
+                     </a>
+                </li>
+                <div class="separador"></div>
+                <li onclick="window.location.replace('favoritos.html');">
+                     <a href="#" >
+                      <img src="css/images/fav-icono.png" width="50" height="44">
+                      <span style="font-size:10px !important; margin-bottom:0px; margin-left:0px; display: block; color:#000;">FAVORITOS</span>
+                     </a>
+                </li>
+            </ul>
+        </div>
+        <div class="boton_perfil">
+          <span class="span_perfil">Mi Perfil</span>
+          <img onclick="window.location.replace('perfil.html');" src="css/images/boton_perfil.png" width="99" height="42"> 
+        </div>
+   </div>
+</div><!-- /page -->
+<script src="js/buscador.js"></script>
+</body>
+</html>

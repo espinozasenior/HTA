@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ARCHIVOS</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="css/jquery.mobile-1.3.1.css" />
+    <link rel="stylesheet" href="css/style.css"/>
+    <style type="text/css">   
+     #contenido{
+      text-align: center;   
+     } 
+
+     body{
+      background-image: url(css/images/bg-archivo.png);
+      background-repeat:no-repeat;
+      background-position:center;
+      background-size: 52em;
+     } 
+
+     .list li:active{
+            background-color: #e8671e;
+            -webkit-box-shadow: 1px 1px 2px rgba(255,255,255,.83), inset 0 6px 14px rgba(0,0,0,.3);
+            -moz-box-shadow: 1px 1px 2px rgba(255,255,255,.83), inset 0 6px 14px rgba(0,0,0,.3);
+         box-shadow: 1px 1px 2px rgba(255,255,255,.83), inset 0 6px 14px rgba(0,0,0,.3);
+     }
+    
+    /* Large screens ----------- */ 
+      @media only screen and (min-width : 870px) {
+        .cabecera-list{
+          font-family: Arial;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #00637d;
+  text-shadow: 2px 2px 6px rgba(255,255,255,.83), inset 0 6px 14px rgba(0,0,0,.3);
+  
+        }
+        .list{
+            text-align: center;
+            background-image: url(css/images/forma2.png);
+            background-repeat: no-repeat;
+            background-size: 25em 34em;
+            padding-top: 1em;
+            margin: 0em 0em 0em 3em;            
+            height: 33em;
+            width: 25em;
+            float: left;
+        }
+
+        .list ul {
+          list-style: none;
+          padding: 0em 0em 0em 0em;
+        }
+
+        .list li{ 
+            cursor: pointer;           
+            padding: 0.3em;
+            font-family: Arial;
+            font-size: 1rem;
+            margin-left: 0.5em;
+            color: #000;
+            text-shadow: 0 1px rgba(255,255,255,.75);
+            border-bottom: #cacaca solid 1px;
+            width: 23.5em;
+        }
+        .list li:first-child{
+            border-top: #cacaca solid 1px;
+        }
+        
+      }
+
+      /* iPads (portrait) ----------- */
+    @media only screen and (max-width : 869px) { 
+        
+
+    }
+
+      @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+        
+      }
+  
+    </style>
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.mobile-1.3.1.js"></script>
+    <script src="js/fastClick.js"></script>
+    <script src="js/BlockUI.js"></script>
+    <link href="css/video-js.css" rel="stylesheet">
+<script src="http://vjs.zencdn.net/4.2/video.js"></script>
+<script>
+function getWindowHeight() {
+        var windowHeight = 0;
+        if (typeof(window.innerHeight) == 'number') {
+          windowHeight = window.innerHeight;
+        }
+        else {
+          if (document.documentElement && document.documentElement.clientHeight) {
+            windowHeight = document.documentElement.clientHeight;
+          }
+          else {
+            if (document.body && document.body.clientHeight) {
+              windowHeight = document.body.clientHeight;
+            }
+          }
+        }
+        return windowHeight;
+      }
+    
+    $( document ).on( "pageshow", function(){
+		
+		calculos();
+	   
+		window.addEventListener("resize", function(){
+		   calculos();   
+		}, true);
+
+    window.addEventListener("orientationchange", function() {
+              document.location.reload(false);
+    }, false);
+
+    window.addEventListener('onload', function() {
+        FastClick.attach(document.body);                            
+    }, false); 
+    			
+	   function calculos(){
+
+         var anchoArticle = $('.list').width();
+        $('.list').css('margin-left', ($(window).width() - anchoArticle * 2)/3.5);
+			
+		   //barra superior		
+		   var hencab_1= $('#encabezado').css('height');
+		   var pencab= $('#encabezado').css('padding-top');
+		   var valor_enca1 = hencab_1.substr(0, (hencab_1.length - 2));
+		   var valorp = 2 * (pencab.substr(0, (pencab.length - 2)));
+		   var total_1 = parseFloat(valor_enca1) + parseFloat(valorp);
+		   
+		  			   
+    }
+	   
+	   
+    });
+	
+</script>
+</head>
+<body>
+<div data-role="page" class="jqm-demos">
+    <div id="encabezado" class="ui-bar ui-bar-b">
+        <div style="float: left; margin-top: 0.3em;">
+            <h1>ARCHIVOS</h1>
+        </div>
+        <div style="float: right;  margin-top: 0.2em;">
+            <div data-role="fieldcontain" class="ui-hide-label" style="float: left;">
+                <input type="search" name="search-110" id="search-10" value="">
+            </div>
+            <div style="float: right;">
+                <a href="#" data-role="button" data-inline="true" data-mini="true" class="boton_buscar">BUSCAR</a>
+                <a href="#" data-inline="true" data-mini="true" class="boton_info">
+                    <img src="css/images/info-icon.png" width="33" height="33">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="contenido" data-role="content" class="jqm-content fondo_contenido">
+<article class="list">
+  <span class="cabecera-list">Tablas y esquemas</span>
+  <ul  id="list1">          
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Milk</li>
+</ul>
+</article>
+        
+<article class="list" >
+  <span class="cabecera-list">Imágenes</span>
+<ul id="list2">          
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Milk</li>
+</ul>
+</article>
+
+     </div><!-- /content -->
+
+</div><!-- /page -->
+<script src="js/buscador.js"></script>
+</body>
+</html>
